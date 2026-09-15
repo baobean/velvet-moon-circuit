@@ -1,0 +1,8 @@
+cd /mnt/mmlab2024nas/ldtuan/code/ndbao_hbngoc/rag-regen
+
+# Step 1 (~8 min): one case, one image — proves inpaint actually works
+./scripts/gpu_wait.sh -- ./scripts/run.sh repair --case axolotl \
+      --mechanism inpaint --draft outputs/screen_latest/axolotl/draft.png
+
+# Step 2 (~80 min): only after step 1 looks right
+./scripts/gpu_wait.sh -- ./scripts/run.sh pipeline --mechanism inpaint

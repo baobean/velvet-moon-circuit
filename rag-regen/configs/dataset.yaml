@@ -1,0 +1,206 @@
+# Generated for the premise gate (Plan 1 Task 12 Step 6) from the real
+# controlled_dataset_v2 image set.
+#
+# The first 11 cases (african_grey_parrot .. cardinal_bird) are the
+# fine-grained concepts the method targets. The last 11 (hedgehog .. violin)
+# are controls FLUX should already render correctly. If the controls fail too,
+# the drafts are broken rather than the concepts rare -- that is what makes the
+# fail rate interpretable.
+
+name: controlled_dataset_v2
+images_root: /mnt/mmlab2024nas/ldtuan/code/ndbao_hbngoc/arc-ImageRAG/datasets/controlled_dataset_v2/images
+
+cases:
+  - id: african_grey_parrot
+    prompt: "an African grey parrot perched on a wooden branch"
+    concept: "African grey parrot"
+    coarse: "parrot"
+    gt_refs:
+      - african_grey_parrot_0.jpg
+      - african_grey_parrot_1.jpg
+      - african_grey_parrot_2.jpg
+  - id: amur_leopard
+    prompt: "an Amur leopard walking across a snowy ridge"
+    concept: "Amur leopard"
+    coarse: "leopard"
+    gt_refs:
+      - amur_leopard_0.jpeg
+      - amur_leopard_1.jpeg
+      - amur_leopard_2.jpeg
+      - amur_leopard_3.jpeg
+  - id: anas_platyrhynchos
+    prompt: "an Anas platyrhynchos swimming in a reed-lined pond"
+    concept: "Anas platyrhynchos"
+    coarse: "duck"
+    gt_refs:
+      - anas_platyrhynchos_0.jpeg
+      - anas_platyrhynchos_1.jpeg
+      - anas_platyrhynchos_2.jpeg
+  - id: axolotl
+    prompt: "an axolotl resting on the gravel floor of an aquarium"
+    concept: "axolotl"
+    coarse: "salamander"
+    gt_refs:
+      - axolotl_0.jpeg
+      - axolotl_1.webp
+      - axolotl_2.webp
+      - axolotl_3.jpeg
+  - id: boston_bull
+    prompt: "a Boston bull sitting on a porch step in afternoon light"
+    concept: "Boston bull"
+    coarse: "dog"
+    gt_refs:
+      - boston_bull_0.jpeg
+      - boston_bull_1.jpeg
+      - boston_bull_2.jpeg
+  - id: durian
+    prompt: "a durian resting on a market table"
+    concept: "durian"
+    coarse: "fruit"
+    gt_refs:
+      - durian_0.webp
+      - durian_1.jpg
+      - durian_2.jpeg
+      - durian_3.jpg
+      - durian_4.jpg
+  - id: love_in_a_mist
+    prompt: "a love-in-a-mist flower blooming in a summer garden"
+    concept: "love-in-a-mist"
+    coarse: "flower"
+    gt_refs:
+      - love_in_a_mist_0.jpg
+      - love_in_a_mist_1.jpg
+      - love_in_a_mist_2.webp
+      - love_in_a_mist_3.webp
+  - id: monkey_puzzle_tree
+    prompt: "a monkey puzzle tree on a windswept hillside"
+    concept: "monkey puzzle tree"
+    coarse: "tree"
+    gt_refs:
+      - monkey_puzzle_tree_0.jpeg
+      - monkey_puzzle_tree_1.jpeg
+      - monkey_puzzle_tree_2.jpeg
+      - monkey_puzzle_tree_3.jpeg
+  - id: zalophus_californianus
+    prompt: "a Zalophus californianus basking on a rocky shore"
+    concept: "Zalophus californianus"
+    coarse: "sea lion"
+    gt_refs:
+      - zalophus_californianus_0.jpeg
+      - zalophus_californianus_1.jpg
+      - zalophus_californianus_2.jpeg
+  - id: bonsai_tree
+    prompt: "a bonsai tree in a shallow ceramic pot on a windowsill"
+    concept: "bonsai tree"
+    coarse: "tree"
+    gt_refs:
+      - bonsai_tree_0.jpg
+      - bonsai_tree_1.jpg
+      - bonsai_tree_2.jpg
+  - id: cardinal_bird
+    prompt: "a cardinal bird perched on a snowy branch"
+    concept: "cardinal bird"
+    coarse: "bird"
+    gt_refs:
+      - cardinal_bird_0.jpg
+      - cardinal_bird_1.jpg
+      - cardinal_bird_2.jpg
+  - id: hedgehog
+    prompt: "a hedgehog walking through fallen autumn leaves"
+    concept: "hedgehog"
+    coarse: "small mammal"
+    kind: control
+    gt_refs:
+      - hedgehog_0.jpg
+      - hedgehog_1.jpg
+      - hedgehog_2.jpg
+  - id: cactus
+    prompt: "a cactus standing in a sunlit desert clearing"
+    concept: "cactus"
+    coarse: "plant"
+    kind: control
+    gt_refs:
+      - cactus_0.jpg
+      - cactus_1.jpg
+      - cactus_2.jpg
+  - id: flamingo
+    prompt: "a flamingo standing in shallow water at sunrise"
+    concept: "flamingo"
+    coarse: "bird"
+    kind: control
+    gt_refs:
+      - flamingo_0.jpg
+      - flamingo_1.jpg
+      - flamingo_2.jpg
+  - id: fox
+    prompt: "a fox trotting through tall grass at dusk"
+    concept: "fox"
+    coarse: "canine"
+    kind: control
+    gt_refs:
+      - fox_0.jpg
+      - fox_1.jpg
+      - fox_2.jpg
+  - id: golden_retriever
+    prompt: "a golden retriever running across a green lawn"
+    concept: "golden retriever"
+    coarse: "dog"
+    kind: control
+    gt_refs:
+      - golden_retriever_0.jpg
+      - golden_retriever_1.jpg
+      - golden_retriever_2.jpg
+  - id: panda
+    prompt: "a panda sitting among bamboo stalks"
+    concept: "panda"
+    coarse: "bear"
+    kind: control
+    gt_refs:
+      - panda_0.jpg
+      - panda_1.jpg
+      - panda_2.jpg
+  - id: polar_bear
+    prompt: "a polar bear walking across drifting sea ice"
+    concept: "polar bear"
+    coarse: "bear"
+    kind: control
+    gt_refs:
+      - polar_bear_0.jpg
+      - polar_bear_1.jpg
+      - polar_bear_2.jpg
+  - id: red_ferrari
+    prompt: "a red Ferrari parked on a coastal road"
+    concept: "red Ferrari"
+    coarse: "sports car"
+    kind: control
+    gt_refs:
+      - red_ferrari_0.jpg
+      - red_ferrari_1.jpg
+      - red_ferrari_2.jpg
+  - id: stack_of_books
+    prompt: "a stack of books on a wooden desk"
+    concept: "stack of books"
+    coarse: "books"
+    kind: control
+    gt_refs:
+      - stack_of_books_0.jpg
+      - stack_of_books_1.jpg
+      - stack_of_books_2.jpg
+  - id: sushi
+    prompt: "a plate of sushi on a dark slate board"
+    concept: "sushi"
+    coarse: "food"
+    kind: control
+    gt_refs:
+      - sushi_0.jpg
+      - sushi_1.jpg
+      - sushi_2.jpg
+  - id: violin
+    prompt: "a violin resting on a velvet case"
+    concept: "violin"
+    coarse: "string instrument"
+    kind: control
+    gt_refs:
+      - violin_0.jpg
+      - violin_1.jpg
+      - violin_2.jpg

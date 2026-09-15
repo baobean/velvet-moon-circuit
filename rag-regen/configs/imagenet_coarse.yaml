@@ -1,0 +1,538 @@
+# ImageNet class -> groundable superordinate. Doc 5 §5.
+#
+# This is the candidate pool for the `common` cohort: make_cases.py ranks
+# these by LAION caption frequency and takes the top 70. A pool larger than
+# the selection keeps the ranking meaningful.
+#
+# Three rules for every entry:
+#   1. coarse != concept, or config.load_dataset:111 raises -- identical terms
+#      make the fine-grained margin identically zero.
+#   2. coarse must be a term GroundingDINO actually grounds. "dog" grounds;
+#      "domestic animal" does not. WordNet hypernyms were rejected for this
+#      reason ("teleost fishes").
+#   3. the KEY must not be an English word whose dominant sense is something
+#      other than the ImageNet class. corpus.caption_matches is a word-
+#      boundary regex with no sense disambiguation, so frequency ranking
+#      actively selects for these: retrieval returns toy kites and
+#      construction cranes, the pipeline pastes one over a bird draft, and
+#      DINO scores it against the ImageNet bird answer key -- reading out as
+#      `harm`, the method blamed for a corpus-builder artifact.
+#      corpus_density looks healthy for exactly these cases.
+
+goldfish: fish
+great white shark: shark
+tiger shark: shark
+hammerhead: shark
+stingray: fish
+ostrich: bird
+goldfinch: bird
+house finch: bird
+junco: bird
+indigo bunting: bird
+bulbul: bird
+magpie: bird
+chickadee: bird
+water ouzel: bird
+bald eagle: bird
+vulture: bird
+great grey owl: owl
+fire salamander: salamander
+common newt: salamander
+eft: salamander
+spotted salamander: salamander
+bullfrog: frog
+tree frog: frog
+tailed frog: frog
+loggerhead: turtle
+leatherback turtle: turtle
+mud turtle: turtle
+terrapin: turtle
+box turtle: turtle
+banded gecko: lizard
+common iguana: lizard
+american chameleon: lizard
+whiptail: lizard
+agama: lizard
+frilled lizard: lizard
+alligator lizard: lizard
+gila monster: lizard
+green lizard: lizard
+african crocodile: crocodile
+american alligator: crocodile
+triceratops: dinosaur
+thunder snake: snake
+ringneck snake: snake
+hognose snake: snake
+green snake: snake
+king snake: snake
+garter snake: snake
+water snake: snake
+vine snake: snake
+night snake: snake
+boa constrictor: snake
+rock python: snake
+indian cobra: snake
+green mamba: snake
+sea snake: snake
+horned viper: snake
+diamondback: snake
+sidewinder: snake
+trilobite: fossil
+harvestman: spider
+scorpion: arachnid
+black and gold garden spider: spider
+barn spider: spider
+garden spider: spider
+black widow: spider
+tarantula: spider
+wolf spider: spider
+tick: insect
+centipede: arthropod
+black grouse: bird
+ptarmigan: bird
+ruffed grouse: bird
+prairie chicken: bird
+peacock: bird
+quail: bird
+partridge: bird
+african grey: parrot
+macaw: parrot
+sulphur-crested cockatoo: parrot
+lorikeet: parrot
+coucal: bird
+bee eater: bird
+hornbill: bird
+hummingbird: bird
+jacamar: bird
+toucan: bird
+red-breasted merganser: duck
+goose: bird
+black swan: bird
+tusker: elephant
+echidna: animal
+platypus: animal
+wallaby: marsupial
+koala: marsupial
+wombat: marsupial
+jellyfish: sea creature
+sea anemone: sea creature
+brain coral: coral
+flatworm: worm
+nematode: worm
+conch: shell
+snail: mollusc
+slug: mollusc
+sea slug: sea creature
+chiton: mollusc
+chambered nautilus: shell
+dungeness crab: crab
+rock crab: crab
+fiddler crab: crab
+king crab: crab
+american lobster: lobster
+spiny lobster: lobster
+crayfish: crustacean
+hermit crab: crab
+isopod: crustacean
+white stork: bird
+black stork: bird
+spoonbill: bird
+flamingo: bird
+little blue heron: bird
+american egret: bird
+bittern: bird
+limpkin: bird
+european gallinule: bird
+american coot: bird
+bustard: bird
+ruddy turnstone: bird
+red-backed sandpiper: bird
+redshank: bird
+dowitcher: bird
+oystercatcher: bird
+pelican: bird
+king penguin: penguin
+albatross: bird
+grey whale: whale
+killer whale: whale
+dugong: sea mammal
+sea lion: animal
+chihuahua: dog
+japanese spaniel: dog
+maltese dog: dog
+pekinese: dog
+shih-tzu: dog
+blenheim spaniel: dog
+papillon: dog
+toy terrier: dog
+rhodesian ridgeback: dog
+afghan hound: dog
+basset: dog
+beagle: dog
+bloodhound: dog
+bluetick: dog
+golden retriever: dog
+labrador retriever: dog
+german shepherd: dog
+rottweiler: dog
+siberian husky: dog
+pug: dog
+pomeranian: dog
+chow: dog
+samoyed: dog
+dalmatian: dog
+boston bull: dog
+tabby: cat
+persian cat: cat
+siamese cat: cat
+egyptian cat: cat
+lynx: big cat
+leopard: big cat
+snow leopard: big cat
+lion: big cat
+tiger: big cat
+cheetah: big cat
+brown bear: bear
+american black bear: bear
+ice bear: bear
+sloth bear: bear
+mongoose: animal
+meerkat: animal
+ladybug: insect
+dragonfly: insect
+monarch: butterfly
+sulphur butterfly: butterfly
+starfish: sea creature
+sea urchin: sea creature
+wood rabbit: rabbit
+hare: animal
+hamster: rodent
+porcupine: rodent
+fox squirrel: squirrel
+marmot: rodent
+guinea pig: rodent
+sorrel: horse
+zebra: equine
+hog: pig
+wild boar: pig
+warthog: pig
+hippopotamus: animal
+ox: cattle
+water buffalo: cattle
+bison: cattle
+ram: sheep
+bighorn: sheep
+ibex: goat
+gazelle: antelope
+arabian camel: camel
+llama: animal
+weasel: animal
+mink: animal
+polecat: animal
+otter: animal
+skunk: animal
+badger: animal
+orangutan: ape
+gorilla: ape
+chimpanzee: ape
+gibbon: ape
+guenon: monkey
+baboon: monkey
+macaque: monkey
+langur: monkey
+capuchin: monkey
+howler monkey: monkey
+spider monkey: monkey
+squirrel monkey: monkey
+madagascar cat: lemur
+indri: lemur
+giant panda: bear
+lesser panda: panda
+acoustic guitar: guitar
+electric guitar: guitar
+banjo: string instrument
+cello: string instrument
+violin: string instrument
+harp: string instrument
+grand piano: piano
+accordion: instrument
+harmonica: instrument
+oboe: instrument
+sax: instrument
+trombone: instrument
+cornet: instrument
+french horn: instrument
+drum: instrument
+gong: instrument
+maraca: instrument
+steel drum: instrument
+ambulance: vehicle
+beach wagon: car
+cab: car
+convertible: car
+jeep: car
+limousine: car
+minivan: car
+model t: car
+racer: car
+sports car: car
+fire engine: truck
+garbage truck: truck
+pickup: truck
+tow truck: truck
+trailer truck: truck
+school bus: bus
+trolleybus: bus
+minibus: bus
+moped: motorcycle
+mountain bike: bicycle
+tandem bicycle: bicycle
+motor scooter: scooter
+airliner: aircraft
+warplane: aircraft
+balloon: aircraft
+airship: aircraft
+space shuttle: spacecraft
+canoe: boat
+catamaran: boat
+fireboat: boat
+gondola: boat
+lifeboat: boat
+speedboat: boat
+yawl: boat
+schooner: boat
+container ship: ship
+liner: ship
+pirate: ship
+submarine: vessel
+aircraft carrier: ship
+steam locomotive: train
+electric locomotive: train
+freight car: train
+passenger car: train
+bassinet: bed
+cradle: bed
+four-poster: bed
+crib: bed
+studio couch: couch
+rocking chair: chair
+folding chair: chair
+barber chair: chair
+throne: chair
+desk: table
+dining table: table
+pool table: table
+wardrobe: cabinet
+chiffonier: cabinet
+bookcase: shelf
+espresso maker: appliance
+microwave: appliance
+dishwasher: appliance
+refrigerator: appliance
+toaster: appliance
+waffle iron: appliance
+washer: appliance
+vacuum: appliance
+electric fan: appliance
+space heater: appliance
+coffee mug: mug
+beer glass: glass
+goblet: glass
+wine bottle: bottle
+beer bottle: bottle
+water bottle: bottle
+pop bottle: bottle
+whiskey jug: jug
+teapot: pot
+coffeepot: pot
+frying pan: pan
+wok: pan
+dutch oven: pot
+caldron: pot
+mixing bowl: bowl
+soup bowl: bowl
+plate: dish
+tray: dish
+spatula: utensil
+wooden spoon: utensil
+ladle: utensil
+corkscrew: tool
+can opener: tool
+hammer: tool
+screwdriver: tool
+power drill: tool
+chain saw: tool
+lawn mower: machine
+shovel: tool
+plunger: tool
+broom: tool
+backpack: bag
+purse: bag
+sleeping bag: bag
+mailbag: bag
+plastic bag: bag
+running shoe: shoe
+cowboy boot: boot
+clog: shoe
+sandal: shoe
+sombrero: hat
+cowboy hat: hat
+bearskin: hat
+bonnet: hat
+crash helmet: helmet
+football helmet: helmet
+mitten: glove
+sunglasses: glasses
+necklace: jewellery
+wall clock: clock
+analog clock: clock
+digital clock: clock
+hourglass: timepiece
+sundial: timepiece
+barometer: instrument
+stopwatch: timepiece
+laptop: computer
+desktop computer: computer
+hand-held computer: computer
+cellular telephone: phone
+dial telephone: phone
+pay-phone: phone
+television: screen
+monitor: screen
+computer keyboard: keyboard
+joystick: controller
+remote control: controller
+printer: machine
+photocopier: machine
+projector: machine
+loudspeaker: speaker
+microphone: audio equipment
+cassette player: audio equipment
+cd player: audio equipment
+radio: audio equipment
+tape player: audio equipment
+reflex camera: camera
+polaroid camera: camera
+binoculars: optical instrument
+sunglass: glasses
+candle: light
+table lamp: lamp
+spotlight: light
+torch: light
+jack-o'-lantern: pumpkin
+pinwheel: toy
+teddy: toy
+soccer ball: ball
+basketball: ball
+volleyball: ball
+rugby ball: ball
+golf ball: ball
+tennis ball: ball
+ping-pong ball: ball
+baseball: ball
+croquet ball: ball
+punching bag: sports equipment
+dumbbell: sports equipment
+barbell: sports equipment
+balance beam: sports equipment
+horizontal bar: sports equipment
+parallel bars: sports equipment
+ski: sports equipment
+snowmobile: vehicle
+dogsled: sled
+bobsled: sled
+paddle: oar
+racket: sports equipment
+rifle: weapon
+revolver: weapon
+cannon: weapon
+castle: building
+church: building
+mosque: building
+palace: building
+monastery: building
+library: building
+barn: building
+greenhouse: building
+boathouse: building
+lighthouse: tower
+bell cote: tower
+obelisk: monument
+triumphal arch: monument
+viaduct: bridge
+suspension bridge: bridge
+steel arch bridge: bridge
+pier: dock
+picket fence: fence
+worm fence: fence
+chainlink fence: fence
+stone wall: wall
+mountain tent: tent
+parachute: fabric
+flagpole: pole
+street sign: sign
+traffic light: light
+throne room: room
+strawberry: fruit
+orange: fruit
+lemon: fruit
+fig: fruit
+pineapple: fruit
+banana: fruit
+jackfruit: fruit
+custard apple: fruit
+pomegranate: fruit
+granny smith: apple
+bell pepper: vegetable
+cucumber: vegetable
+artichoke: vegetable
+cauliflower: vegetable
+broccoli: vegetable
+zucchini: vegetable
+acorn squash: vegetable
+butternut squash: vegetable
+spaghetti squash: vegetable
+cardoon: vegetable
+mushroom: fungus
+agaric: fungus
+corn: vegetable
+cabbage head: vegetable
+bagel: bread
+pretzel: bread
+french loaf: bread
+cheeseburger: food
+hotdog: food
+pizza: food
+burrito: food
+carbonara: food
+meat loaf: food
+guacamole: food
+consomme: food
+trifle: dessert
+ice cream: dessert
+ice lolly: dessert
+chocolate sauce: sauce
+dough: food
+red wine: drink
+espresso: drink
+eggnog: drink
+daisy: flower
+yellow lady's slipper: flower
+cardoon flower: flower
+rapeseed: plant
+corn poppy: flower
+buckeye: plant
+coral fungus: fungus
+earthstar: fungus
+hen-of-the-woods: fungus
+bolete: fungus
+stinkhorn: fungus
+alp: mountain
+volcano: mountain
+cliff: rock formation
+promontory: rock formation
+sandbar: shore
+seashore: shore
+lakeside: shore
+coral reef: reef
+geyser: spring

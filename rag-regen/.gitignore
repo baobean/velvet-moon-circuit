@@ -1,0 +1,9 @@
+outputs/
+data/
+logs/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.claude/
+.venv-fgclip/
+.venv-qwen-reranker/

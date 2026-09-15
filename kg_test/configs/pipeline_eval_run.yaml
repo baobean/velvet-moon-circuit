@@ -1,0 +1,6 @@
+# Override for the first real Phase-1 eval run (Task 11). n_refine trimmed
+# from the class default of 2 to 1: this shared RTX 4090 has been observed
+# to have another researcher's job grow its footprint mid-run, and every
+# extra refine iteration is another full generate+verify reload cycle that
+# risks a fresh OOM. Everything else keeps GraftConfig's defaults.
+n_refine: 1

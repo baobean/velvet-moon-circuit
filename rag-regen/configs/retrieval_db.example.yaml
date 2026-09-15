@@ -1,0 +1,7 @@
+# Copy to retrieval_db.yaml and edit. See docs/RUNBOOK.md §3.2.
+
+name: my_retrieval_db
+images_root: /path/to/retrieval/corpus
+index_path: data/rag_db/index.faiss
+encoder: siglip_so400m_384      # must match what build-index used
+captions: null                  # optional CSV with columns: path,caption

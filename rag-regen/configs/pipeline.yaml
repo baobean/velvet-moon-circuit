@@ -1,0 +1,17 @@
+# Numeric knobs. Safe for an operator to change; nothing here needs code edits.
+
+retry_budget: 3        # N — also the retrieval depth k (spec §3)
+tau: 0.25              # Stream A threshold: crop sim below this = MISSING
+steps: 28              # FLUX.1-Kontext denoising steps
+seed: 0
+mask_dilate_px: 12     # slack around the draft mask (doc 1 §5)
+ref_prep: crop         # none reproduces the old full-photo conditioning
+prototype_delta: null  # calibrate on a dev split; requires --proto-arm
+crop_scorer: siglip_so400m_384   # Stream A; or fgclip (set by the bake-off)
+retriever: siglip_so400m_384     # Step 4;  or fgclip (set by the bake-off)
+
+eval:                    # doc 4. Must differ from retriever/crop_scorer above.
+  heldout_refs: 1        # refs reserved for DINO; never edited with
+  dino: facebook/dinov3-vitl16-pretrain-lvd1689m
+  clip: laion/CLIP-ViT-L-14-laion2B-s32B-b82K
+  siglip: google/siglip-base-patch16-384

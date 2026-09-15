@@ -1,0 +1,29 @@
+# Large data / generated artifacts (kept out of git for both projects)
+data/
+outputs/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Virtual envs
+.venv/
+.venv-fgclip/
+.venv-qwen-reranker/
+env/
+
+# Local tooling / secrets
+.claude/
+*.env
+
+# Large binary artifacts (defensive; data/ should already cover these)
+*.zip
+*.faiss
+*.faiss.*
+*.ckpt
+*.pt
+*.pth
+*.safetensors

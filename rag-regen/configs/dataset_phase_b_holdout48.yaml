@@ -1,0 +1,486 @@
+# The frozen 24+24 Phase B holdout (from outputs/phase_b/holdout.json).
+# Do not hand-edit.
+
+name: phase_b_holdout48
+images_root: /mnt/mmlab2024nas/ldtuan/code/ndbao_hbngoc/rag-regen/data/gt_refs_phase_b
+cases:
+- id: agaric
+  prompt: a agaric in soft afternoon light
+  concept: agaric
+  coarse: fungus
+  kind: target
+  cohort: common
+  gt_refs:
+  - agaric/agaric_0.jpg
+  - agaric/agaric_1.jpg
+  - agaric/agaric_2.jpg
+- id: basset
+  prompt: a basset resting on a wooden table
+  concept: basset
+  coarse: dog
+  kind: target
+  cohort: common
+  gt_refs:
+  - basset/basset_0.jpg
+  - basset/basset_1.jpg
+  - basset/basset_2.jpg
+- id: gong
+  prompt: a gong seen from a low angle
+  concept: gong
+  coarse: instrument
+  kind: target
+  cohort: common
+  gt_refs:
+  - gong/gong_0.jpg
+  - gong/gong_1.jpg
+  - gong/gong_2.jpg
+- id: hog
+  prompt: a hog on a bright summer morning
+  concept: hog
+  coarse: pig
+  kind: target
+  cohort: common
+  gt_refs:
+  - hog/hog_0.jpg
+  - hog/hog_1.jpg
+  - hog/hog_2.jpg
+- id: hotdog
+  prompt: a hotdog against a dark neutral backdrop
+  concept: hotdog
+  coarse: food
+  kind: target
+  cohort: common
+  gt_refs:
+  - hotdog/hotdog_0.jpg
+  - hotdog/hotdog_1.jpg
+  - hotdog/hotdog_2.jpg
+- id: koala
+  prompt: a koala in soft afternoon light
+  concept: koala
+  coarse: marsupial
+  kind: target
+  cohort: common
+  gt_refs:
+  - koala/koala_0.jpg
+  - koala/koala_1.jpg
+  - koala/koala_2.jpg
+- id: macaque
+  prompt: a macaque photographed against a plain background
+  concept: macaque
+  coarse: monkey
+  kind: target
+  cohort: common
+  gt_refs:
+  - macaque/macaque_0.jpg
+  - macaque/macaque_1.jpg
+  - macaque/macaque_2.jpg
+- id: magpie
+  prompt: a magpie resting on a wooden table
+  concept: magpie
+  coarse: bird
+  kind: target
+  cohort: common
+  gt_refs:
+  - magpie/magpie_0.jpg
+  - magpie/magpie_1.jpg
+  - magpie/magpie_2.jpg
+- id: papillon
+  prompt: a papillon standing in an open field
+  concept: papillon
+  coarse: dog
+  kind: target
+  cohort: common
+  gt_refs:
+  - papillon/papillon_0.jpg
+  - papillon/papillon_1.jpg
+  - papillon/papillon_2.jpg
+- id: partridge
+  prompt: a partridge lit from one side in a quiet room
+  concept: partridge
+  coarse: bird
+  kind: target
+  cohort: common
+  gt_refs:
+  - partridge/partridge_0.jpg
+  - partridge/partridge_1.jpg
+  - partridge/partridge_2.jpg
+- id: pelican
+  prompt: a pelican seen from a low angle
+  concept: pelican
+  coarse: bird
+  kind: target
+  cohort: common
+  gt_refs:
+  - pelican/pelican_0.jpg
+  - pelican/pelican_1.jpg
+  - pelican/pelican_2.jpg
+- id: snow_leopard
+  prompt: a snow leopard against a dark neutral backdrop
+  concept: snow leopard
+  coarse: big cat
+  kind: target
+  cohort: common
+  gt_refs:
+  - snow_leopard/snow_leopard_0.jpg
+  - snow_leopard/snow_leopard_1.jpg
+  - snow_leopard/snow_leopard_2.jpg
+- id: soccer_ball
+  prompt: a soccer ball in soft afternoon light
+  concept: soccer ball
+  coarse: ball
+  kind: target
+  cohort: common
+  gt_refs:
+  - soccer_ball/soccer_ball_0.jpg
+  - soccer_ball/soccer_ball_1.jpg
+  - soccer_ball/soccer_ball_2.jpg
+- id: traffic_light
+  prompt: a traffic light resting on a wooden table
+  concept: traffic light
+  coarse: light
+  kind: target
+  cohort: common
+  gt_refs:
+  - traffic_light/traffic_light_0.jpg
+  - traffic_light/traffic_light_1.jpg
+  - traffic_light/traffic_light_2.jpg
+- id: bell_pepper
+  prompt: a bell pepper outdoors on an overcast day
+  concept: bell pepper
+  coarse: vegetable
+  kind: target
+  cohort: common
+  gt_refs:
+  - bell_pepper/bell_pepper_0.jpg
+  - bell_pepper/bell_pepper_1.jpg
+  - bell_pepper/bell_pepper_2.jpg
+- id: bighorn
+  prompt: a bighorn in sharp focus, close up
+  concept: bighorn
+  coarse: sheep
+  kind: target
+  cohort: common
+  gt_refs:
+  - bighorn/bighorn_0.jpg
+  - bighorn/bighorn_1.jpg
+  - bighorn/bighorn_2.jpg
+- id: dishwasher
+  prompt: a dishwasher on a bright summer morning
+  concept: dishwasher
+  coarse: appliance
+  kind: target
+  cohort: common
+  gt_refs:
+  - dishwasher/dishwasher_0.jpg
+  - dishwasher/dishwasher_1.jpg
+  - dishwasher/dishwasher_2.jpg
+- id: goldfinch
+  prompt: a goldfinch photographed against a plain background
+  concept: goldfinch
+  coarse: bird
+  kind: target
+  cohort: common
+  gt_refs:
+  - goldfinch/goldfinch_0.jpg
+  - goldfinch/goldfinch_1.jpg
+  - goldfinch/goldfinch_2.jpg
+- id: ox
+  prompt: a ox in sharp focus, close up
+  concept: ox
+  coarse: cattle
+  kind: target
+  cohort: common
+  gt_refs:
+  - ox/ox_0.jpg
+  - ox/ox_1.jpg
+  - ox/ox_2.jpg
+- id: sombrero
+  prompt: a sombrero seen from a low angle
+  concept: sombrero
+  coarse: hat
+  kind: target
+  cohort: common
+  gt_refs:
+  - sombrero/sombrero_0.jpg
+  - sombrero/sombrero_1.jpg
+  - sombrero/sombrero_2.jpg
+- id: artichoke
+  prompt: a artichoke photographed against a plain background
+  concept: artichoke
+  coarse: vegetable
+  kind: target
+  cohort: common
+  gt_refs:
+  - artichoke/artichoke_0.jpg
+  - artichoke/artichoke_1.jpg
+  - artichoke/artichoke_2.jpg
+- id: bison
+  prompt: a bison resting on a wooden table
+  concept: bison
+  coarse: cattle
+  kind: target
+  cohort: common
+  gt_refs:
+  - bison/bison_0.jpg
+  - bison/bison_1.jpg
+  - bison/bison_2.jpg
+- id: burrito
+  prompt: a burrito outdoors on an overcast day
+  concept: burrito
+  coarse: food
+  kind: target
+  cohort: common
+  gt_refs:
+  - burrito/burrito_0.jpg
+  - burrito/burrito_1.jpg
+  - burrito/burrito_2.jpg
+- id: pinwheel
+  prompt: a pinwheel against a dark neutral backdrop
+  concept: pinwheel
+  coarse: toy
+  kind: target
+  cohort: common
+  gt_refs:
+  - pinwheel/pinwheel_0.jpg
+  - pinwheel/pinwheel_1.jpg
+  - pinwheel/pinwheel_2.jpg
+- id: canoe
+  prompt: a canoe in soft afternoon light
+  concept: canoe
+  coarse: boat
+  kind: control
+  cohort: common
+  gt_refs:
+  - canoe/canoe_0.jpg
+  - canoe/canoe_1.jpg
+  - canoe/canoe_2.jpg
+- id: leopard
+  prompt: a leopard photographed against a plain background
+  concept: leopard
+  coarse: big cat
+  kind: control
+  cohort: common
+  gt_refs:
+  - leopard/leopard_0.jpg
+  - leopard/leopard_1.jpg
+  - leopard/leopard_2.jpg
+- id: broccoli
+  prompt: a broccoli on a bright summer morning
+  concept: broccoli
+  coarse: vegetable
+  kind: control
+  cohort: common
+  gt_refs:
+  - broccoli/broccoli_0.jpg
+  - broccoli/broccoli_1.jpg
+  - broccoli/broccoli_2.jpg
+- id: ladybug
+  prompt: a ladybug against a dark neutral backdrop
+  concept: ladybug
+  coarse: insect
+  kind: control
+  cohort: common
+  gt_refs:
+  - ladybug/ladybug_0.jpg
+  - ladybug/ladybug_1.jpg
+  - ladybug/ladybug_2.jpg
+- id: pug
+  prompt: a pug in soft afternoon light
+  concept: pug
+  coarse: dog
+  kind: control
+  cohort: common
+  gt_refs:
+  - pug/pug_0.jpg
+  - pug/pug_1.jpg
+  - pug/pug_2.jpg
+- id: seashore
+  prompt: a seashore photographed against a plain background
+  concept: seashore
+  coarse: shore
+  kind: control
+  cohort: common
+  gt_refs:
+  - seashore/seashore_0.jpg
+  - seashore/seashore_1.jpg
+  - seashore/seashore_2.jpg
+- id: snowmobile
+  prompt: a snowmobile resting on a wooden table
+  concept: snowmobile
+  coarse: vehicle
+  kind: control
+  cohort: common
+  gt_refs:
+  - snowmobile/snowmobile_0.jpg
+  - snowmobile/snowmobile_1.jpg
+  - snowmobile/snowmobile_2.jpg
+- id: wall_clock
+  prompt: a wall clock standing in an open field
+  concept: wall clock
+  coarse: clock
+  kind: control
+  cohort: common
+  gt_refs:
+  - wall_clock/wall_clock_0.jpg
+  - wall_clock/wall_clock_1.jpg
+  - wall_clock/wall_clock_2.jpg
+- id: zebra
+  prompt: a zebra lit from one side in a quiet room
+  concept: zebra
+  coarse: equine
+  kind: control
+  cohort: common
+  gt_refs:
+  - zebra/zebra_0.jpg
+  - zebra/zebra_1.jpg
+  - zebra/zebra_2.jpg
+- id: chihuahua
+  prompt: a chihuahua seen from a low angle
+  concept: chihuahua
+  coarse: dog
+  kind: control
+  cohort: common
+  gt_refs:
+  - chihuahua/chihuahua_0.jpg
+  - chihuahua/chihuahua_1.jpg
+  - chihuahua/chihuahua_2.jpg
+- id: picket_fence
+  prompt: a picket fence in soft afternoon light
+  concept: picket fence
+  coarse: fence
+  kind: control
+  cohort: common
+  gt_refs:
+  - picket_fence/picket_fence_0.jpg
+  - picket_fence/picket_fence_1.jpg
+  - picket_fence/picket_fence_2.jpg
+- id: rocking_chair
+  prompt: a rocking chair photographed against a plain background
+  concept: rocking chair
+  coarse: chair
+  kind: control
+  cohort: common
+  gt_refs:
+  - rocking_chair/rocking_chair_0.jpg
+  - rocking_chair/rocking_chair_1.jpg
+  - rocking_chair/rocking_chair_2.jpg
+- id: hammer
+  prompt: a hammer resting on a wooden table
+  concept: hammer
+  coarse: tool
+  kind: control
+  cohort: common
+  gt_refs:
+  - hammer/hammer_0.jpg
+  - hammer/hammer_1.jpg
+  - hammer/hammer_2.jpg
+- id: limousine
+  prompt: a limousine outdoors on an overcast day
+  concept: limousine
+  coarse: car
+  kind: control
+  cohort: common
+  gt_refs:
+  - limousine/limousine_0.jpg
+  - limousine/limousine_1.jpg
+  - limousine/limousine_2.jpg
+- id: ram
+  prompt: a ram standing in an open field
+  concept: ram
+  coarse: sheep
+  kind: control
+  cohort: common
+  gt_refs:
+  - ram/ram_0.jpg
+  - ram/ram_1.jpg
+  - ram/ram_2.jpg
+- id: tabby
+  prompt: a tabby lit from one side in a quiet room
+  concept: tabby
+  coarse: cat
+  kind: control
+  cohort: common
+  gt_refs:
+  - tabby/tabby_0.jpg
+  - tabby/tabby_1.jpg
+  - tabby/tabby_2.jpg
+- id: table_lamp
+  prompt: a table lamp seen from a low angle
+  concept: table lamp
+  coarse: lamp
+  kind: control
+  cohort: common
+  gt_refs:
+  - table_lamp/table_lamp_0.jpg
+  - table_lamp/table_lamp_1.jpg
+  - table_lamp/table_lamp_2.jpg
+- id: water_bottle
+  prompt: a water bottle on a bright summer morning
+  concept: water bottle
+  coarse: bottle
+  kind: control
+  cohort: common
+  gt_refs:
+  - water_bottle/water_bottle_0.jpg
+  - water_bottle/water_bottle_1.jpg
+  - water_bottle/water_bottle_2.jpg
+- id: ambulance
+  prompt: a ambulance against a dark neutral backdrop
+  concept: ambulance
+  coarse: vehicle
+  kind: control
+  cohort: common
+  gt_refs:
+  - ambulance/ambulance_0.jpg
+  - ambulance/ambulance_1.jpg
+  - ambulance/ambulance_2.jpg
+- id: cauliflower
+  prompt: a cauliflower in soft afternoon light
+  concept: cauliflower
+  coarse: vegetable
+  kind: control
+  cohort: common
+  gt_refs:
+  - cauliflower/cauliflower_0.jpg
+  - cauliflower/cauliflower_1.jpg
+  - cauliflower/cauliflower_2.jpg
+- id: cowboy_hat
+  prompt: a cowboy hat photographed against a plain background
+  concept: cowboy hat
+  coarse: hat
+  kind: control
+  cohort: common
+  gt_refs:
+  - cowboy_hat/cowboy_hat_0.jpg
+  - cowboy_hat/cowboy_hat_1.jpg
+  - cowboy_hat/cowboy_hat_2.jpg
+- id: goose
+  prompt: a goose in soft afternoon light
+  concept: goose
+  coarse: bird
+  kind: control
+  cohort: common
+  gt_refs:
+  - goose/goose_0.jpg
+  - goose/goose_1.jpg
+  - goose/goose_2.jpg
+- id: volcano
+  prompt: a volcano seen from a low angle
+  concept: volcano
+  coarse: mountain
+  kind: control
+  cohort: common
+  gt_refs:
+  - volcano/volcano_0.jpg
+  - volcano/volcano_1.jpg
+  - volcano/volcano_2.jpg
+- id: lakeside
+  prompt: a lakeside on a bright summer morning
+  concept: lakeside
+  coarse: shore
+  kind: control
+  cohort: common
+  gt_refs:
+  - lakeside/lakeside_0.jpg
+  - lakeside/lakeside_1.jpg
+  - lakeside/lakeside_2.jpg

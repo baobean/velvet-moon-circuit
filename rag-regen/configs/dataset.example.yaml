@@ -1,0 +1,36 @@
+# Copy to dataset.yaml and edit. See docs/RUNBOOK.md §3.1.
+#
+# gt_refs is REQUIRED for every case: the DINO identity metric and the
+# `oracle` arm both read it. Keep these images OUT of the retrieval corpus,
+# or the `full` arm scores against its own answer key.
+
+name: my_test_set
+images_root: /path/to/your/gt_reference_images
+
+# Optional. Reference images per COARSE term, used by the prototype verifier
+# (score-a --proto-arm ceiling). Keyed by the term, not by case, so terms
+# several cases share are authored once.
+#
+# Three or more per term, and SPREAD ACROSS THE CATEGORY. Three photographs of
+# the same leopard make a second fine-grained prototype, not a superordinate
+# one, and the contrast stops measuring what it claims. `validate` checks the
+# count; nothing can check the spread.
+coarse_refs:
+  leopard:
+    - coarse/leopard_generic_00.jpg
+    - coarse/leopard_generic_01.jpg
+    - coarse/leopard_generic_02.jpg
+
+cases:
+  - id: amur_leopard_01
+    prompt: "an Amur leopard walking across a snowy ridge"
+    concept: "Amur leopard"
+    # The concept's superordinate category, used for the fine-grained
+    # contrastive check: Stream A fails the draft when the crop looks more
+    # like the coarse term than the fine one. Author it from the concept
+    # name alone -- never from a draft you have already looked at, which
+    # would fit the test to its own answer key.
+    coarse: "leopard"
+    gt_refs:
+      - amur_leopard/ref_01.jpg
+      - amur_leopard/ref_02.jpg

@@ -1,0 +1,8 @@
+=== restore process running? ===
+48747 /mnt/mmlab2024nas/ldtuan/miniconda3/envs/kontext/bin/python -m graft.run_restore_resident --graph outputs/mmkg/graph.json --heldout-dir outputs/mmkg/heldout_parts --out outputs/mmkg/restore --config configs/restore_full.yaml
+48813 /bin/bash -c source /mnt/mmlab2024nas/ldtuan/code/ndbao_hbngoc/.claude/shell-snapshots/snapshot-bash-1788763006584-upmqjs.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval '{ echo "=== restore process running? ==="; pgrep -af run_restore_resident 2>&1 || echo "NONE"; echo "=== log size ==="; ls -la outputs/mmkg/restore_full.log 2>&1; echo "=== log content ==="; cat outputs/mmkg/restore_full.log 2>&1; echo "=== restore rows so far ==="; ls outputs/mmkg/restore/*.json 2>/dev/null | wc -l; } > .diag.txt 2>&1; true' < /dev/null && pwd -P >| /tmp/claude-fe9f-cwd
+=== log size ===
+-rwxrwxrwx 1 1024 users 0 Thg 9   7 16:27 outputs/mmkg/restore_full.log
+=== log content ===
+=== restore rows so far ===
+0

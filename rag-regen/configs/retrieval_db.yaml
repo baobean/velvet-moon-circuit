@@ -1,0 +1,11 @@
+# The 100k LAION corpus the `full` arm searches. See doc 5 §3.
+#
+# This is the ONLY image set the pipeline may consult. ImageNet gt_refs live
+# under data/gt_refs/ and are the answer key -- validate.py refuses to run if
+# they ever land inside images_root below.
+
+name: laion100k
+images_root: /mnt/mmlab2024nas/ldtuan/code/ndbao_hbngoc/rag-regen/data/laion100k/images
+index_path: data/laion100k/index.faiss
+encoder: siglip_so400m_384      # must match what build-index used
+captions: null

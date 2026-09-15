@@ -1,0 +1,18 @@
+# Installed into the `kontext` conda env, not a fresh venv.
+# Already present there: torch, transformers==5.14.1, diffusers==0.39.0,
+# bitsandbytes, PyYAML, pillow, numpy.
+pytest
+faiss-cpu
+open_clip_torch
+pandas
+
+# einops: installed only to attempt loading qihoo360/fg-clip-base's custom
+# modeling_fgclip.py (trust_remote_code) during Task 7's investigation.
+# FG-CLIP does not actually run in this env: its vendored code has a deeper
+# incompatibility with transformers==5.14.1 (see ragregen/models.py's module
+# docstring and build_crop_scorer, which refuses to construct it here) and
+# is a bake-off-only candidate loaded from a separate conda env (Task 13).
+# No code in this repo imports einops directly or transitively for anything
+# that runs in this env -- it is safe to remove from `kontext` if reclaiming
+# the install matters more than leaving it for a future FG-CLIP retry here.
+einops
