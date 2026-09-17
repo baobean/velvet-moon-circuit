@@ -34,7 +34,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from PIL import Image  # noqa: E402
 
 from ragregen import config, draft, env, mask, metrics, models, regen, trace  # noqa: E402
-from ragregen.mmkg_store.store import Store  # noqa: E402
 from ragregen.partgraph.arms import ARMS  # noqa: E402
 from ragregen.partgraph.decide import gain_verdict  # noqa: E402
 from ragregen.partgraph.pilot import run_case  # noqa: E402
@@ -85,6 +84,12 @@ def _default_dino_factory(pipe_cfg, device):
 
 
 def _default_store_factory(path):
+    # Lazy: ragregen.mmkg_store.store imports ragregen.mmkg_store.embed_index,
+    # which does `import faiss` at ITS module scope. faiss is a heavy native
+    # dependency with no business loading just because this script was
+    # imported (as the CPU test does) -- deferred to first actual call.
+    from ragregen.mmkg_store.store import Store
+
     return Store.load(path)
 
 

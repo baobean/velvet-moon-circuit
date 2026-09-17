@@ -125,15 +125,27 @@ def _write_pipeline_yaml(tmp_path: Path) -> Path:
     return path
 
 
-def _write_store(tmp_path: Path, species_keys=("species_a", "species_b")) -> Path:
+def _write_store(tmp_path: Path, species_keys=("species_a", "species_b"),
+                 no_parts_for: tuple = ()) -> Path:
+    """Build a real on-disk mmkg_store. `no_parts_for` species get an empty
+    `part_crops` list (medoid still present) -- `select_part_images` then
+    returns {} for them, so `reference_for("partgraph", ...)` raises
+    `LookupError` for that species, exactly the case a dropped-arm test needs.
+    """
     src = tmp_path / "store_src"
     src.mkdir(parents=True, exist_ok=True)
     out_dir = tmp_path / "store"
     records = []
     for i, key in enumerate(species_keys):
         medoid_path = _png(src / f"{key}_medoid.png", (50 + i, 60 + i, 70 + i))
-        part_a = _png(src / f"{key}_partA.png", (0, 128 + i, 0))
-        part_b = _png(src / f"{key}_partB.png", (128 + i, 64, 0))
+        part_crops = []
+        if key not in no_parts_for:
+            part_a = _png(src / f"{key}_partA.png", (0, 128 + i, 0))
+            part_b = _png(src / f"{key}_partB.png", (128 + i, 64, 0))
+            part_crops = [
+                {"part_type": "partA", "image_path": str(part_a), "embedding_ref": i * 10 + 1},
+                {"part_type": "partB", "image_path": str(part_b), "embedding_ref": i * 10 + 2},
+            ]
         records.append(schema.build_record(
             dataset="testds",
             species_key=key,
@@ -143,10 +155,7 @@ def _write_store(tmp_path: Path, species_keys=("species_a", "species_b")) -> Pat
             medoid={"image_path": str(medoid_path), "embedding_ref": i * 10,
                    "k_images": 1, "selection": "test-fixture"},
             candidates=[],
-            part_crops=[
-                {"part_type": "partA", "image_path": str(part_a), "embedding_ref": i * 10 + 1},
-                {"part_type": "partB", "image_path": str(part_b), "embedding_ref": i * 10 + 2},
-            ],
+            part_crops=part_crops,
             attributes={},
             provenance={},
         ))
@@ -276,3 +285,64 @@ def test_case_missing_global_id_is_dropped_before_reaching_the_store(tmp_path):
 
     case_a_rows = [r for r in result["per_case"] if r["case_id"] == "case_a"]
     assert len(case_a_rows) == 2
+
+
+def test_lookup_error_for_one_arm_is_dropped_and_the_rest_still_completes(tmp_path):
+    """`reference_for` raising LookupError inside `run_case` (a species with
+    no part crops -- the partgraph arm has nothing to compose from) must be
+    caught around that one `run_case` call, recorded in `dropped`, and never
+    abort the case's other arm or the other case's two arms. This is the
+    single most safety-critical branch in the runner: a store gap for one
+    (case, arm) pair must not silently discard already-finished GPU work for
+    everything else in the run.
+    """
+    dataset_path = _write_dataset_yaml(tmp_path)
+    pipeline_path = _write_pipeline_yaml(tmp_path)
+    # species_b has a medoid but NO part_crops -> reference_for("partgraph",
+    # ..., "testds:species_b") raises LookupError; its single_medoid arm and
+    # both of species_a's arms are unaffected.
+    store_dir = _write_store(tmp_path, no_parts_for=("species_b",))
+    output_root = tmp_path / "outputs"
+
+    argv = ["--dataset", str(dataset_path), "--pipeline", str(pipeline_path),
+           "--store", str(store_dir), "--output-root", str(output_root)]
+
+    rc = partgraph_pilot.main(
+        argv,
+        drafter_factory=lambda pipe_cfg, device: _FakeDrafter(),
+        masker_factory=_fixed_mask_factory(),
+        inpainter_factory=lambda pipe_cfg, device: _FakeInpainter(),
+        dino_factory=lambda pipe_cfg, device: _ConstEncoder(),
+    )
+    # (d) non-empty `dropped` -> non-zero exit, even though every case was
+    # drafted, masked, and had at least one arm complete.
+    assert rc != 0
+
+    run_dir = _latest_run_dir(output_root)
+    result = json.loads((run_dir / "result.json").read_text())
+
+    # (b) the dropped (case, arm) pair is recorded with a reason.
+    drop = next(d for d in result["dropped"]
+               if d["case_id"] == "case_b" and d["arm"] == "partgraph")
+    assert "species_b" in drop["reason"] or "part" in drop["reason"].lower()
+    assert len(result["dropped"]) == 1
+
+    # (c) case_b's OTHER arm, and both of case_a's arms, still complete.
+    per_case_by_key = {(r["case_id"], r["arm"]) for r in result["per_case"]}
+    assert per_case_by_key == {
+        ("case_a", "single_medoid"), ("case_a", "partgraph"),
+        ("case_b", "single_medoid"),
+    }
+    assert len(result["per_case"]) == 3
+
+    # A dropped arm never produced a reference/output trace; the surviving
+    # arm did.
+    case_b_dir = run_dir / "case_b"
+    assert (case_b_dir / "reference_single_medoid.png").exists()
+    assert (case_b_dir / "output_single_medoid.png").exists()
+    assert not (case_b_dir / "reference_partgraph.png").exists()
+    assert not (case_b_dir / "output_partgraph.png").exists()
+
+    # species_b contributes no delta (only one of its two arms survived);
+    # species_a contributes exactly one.
+    assert len(result["deltas"]) == 1
