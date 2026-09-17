@@ -1,0 +1,337 @@
+# Wk1 rarity/headroom screen dataset -- CUB-200-2011, 30-species random sample
+# (seed=0). Text-only FLUX draft: does it FAIL on these species (spec section 8)?
+# Paired with a separate SigLIP retrieval-headroom check (scripts/retrieval_headroom_screen.py).
+
+name: cub_wk1_screen
+images_root: /mnt/mmlab2024nas/ldtuan/data/partgraph/cub/CUB_200_2011/images
+
+cases:
+  - id: rusty_blackbird
+    prompt: "a photo of a rusty blackbird"
+    concept: "Rusty Blackbird"
+    coarse: "bird"
+    gt_refs:
+      - 011.Rusty_Blackbird/Rusty_Blackbird_0001_6548.jpg
+      - 011.Rusty_Blackbird/Rusty_Blackbird_0003_6749.jpg
+      - 011.Rusty_Blackbird/Rusty_Blackbird_0005_6771.jpg
+      - 011.Rusty_Blackbird/Rusty_Blackbird_0006_6633.jpg
+      - 011.Rusty_Blackbird/Rusty_Blackbird_0009_6853.jpg
+
+  - id: gray_catbird
+    prompt: "a photo of a gray catbird"
+    concept: "Gray Catbird"
+    coarse: "bird"
+    gt_refs:
+      - 019.Gray_Catbird/Gray_Catbird_0001_20695.jpg
+      - 019.Gray_Catbird/Gray_Catbird_0002_21395.jpg
+      - 019.Gray_Catbird/Gray_Catbird_0006_20867.jpg
+      - 019.Gray_Catbird/Gray_Catbird_0007_20186.jpg
+      - 019.Gray_Catbird/Gray_Catbird_0008_20430.jpg
+
+  - id: pelagic_cormorant
+    prompt: "a photo of a pelagic cormorant"
+    concept: "Pelagic Cormorant"
+    coarse: "bird"
+    gt_refs:
+      - 025.Pelagic_Cormorant/Pelagic_Cormorant_0001_23538.jpg
+      - 025.Pelagic_Cormorant/Pelagic_Cormorant_0002_23680.jpg
+      - 025.Pelagic_Cormorant/Pelagic_Cormorant_0003_23695.jpg
+      - 025.Pelagic_Cormorant/Pelagic_Cormorant_0005_23720.jpg
+      - 025.Pelagic_Cormorant/Pelagic_Cormorant_0008_23602.jpg
+
+  - id: bronzed_cowbird
+    prompt: "a photo of a bronzed cowbird"
+    concept: "Bronzed Cowbird"
+    coarse: "bird"
+    gt_refs:
+      - 026.Bronzed_Cowbird/Bronzed_Cowbird_0001_796219.jpg
+      - 026.Bronzed_Cowbird/Bronzed_Cowbird_0002_796244.jpg
+      - 026.Bronzed_Cowbird/Bronzed_Cowbird_0003_796246.jpg
+      - 026.Bronzed_Cowbird/Bronzed_Cowbird_0005_24173.jpg
+      - 026.Bronzed_Cowbird/Bronzed_Cowbird_0008_796250.jpg
+
+  - id: northern_flicker
+    prompt: "a photo of a northern flicker"
+    concept: "Northern Flicker"
+    coarse: "bird"
+    gt_refs:
+      - 036.Northern_Flicker/Northern_Flicker_0004_28854.jpg
+      - 036.Northern_Flicker/Northern_Flicker_0006_28290.jpg
+      - 036.Northern_Flicker/Northern_Flicker_0008_28591.jpg
+      - 036.Northern_Flicker/Northern_Flicker_0011_28466.jpg
+      - 036.Northern_Flicker/Northern_Flicker_0016_28603.jpg
+
+  - id: great_crested_flycatcher
+    prompt: "a photo of a great crested flycatcher"
+    concept: "Great Crested Flycatcher"
+    coarse: "bird"
+    gt_refs:
+      - 038.Great_Crested_Flycatcher/Great_Crested_Flycatcher_0004_29701.jpg
+      - 038.Great_Crested_Flycatcher/Great_Crested_Flycatcher_0006_29362.jpg
+      - 038.Great_Crested_Flycatcher/Great_Crested_Flycatcher_0007_29280.jpg
+      - 038.Great_Crested_Flycatcher/Great_Crested_Flycatcher_0009_29831.jpg
+      - 038.Great_Crested_Flycatcher/Great_Crested_Flycatcher_0010_29396.jpg
+
+  - id: pine_grosbeak
+    prompt: "a photo of a pine grosbeak"
+    concept: "Pine Grosbeak"
+    coarse: "bird"
+    gt_refs:
+      - 056.Pine_Grosbeak/Pine_Grosbeak_0002_38214.jpg
+      - 056.Pine_Grosbeak/Pine_Grosbeak_0003_38437.jpg
+      - 056.Pine_Grosbeak/Pine_Grosbeak_0004_38396.jpg
+      - 056.Pine_Grosbeak/Pine_Grosbeak_0006_38421.jpg
+      - 056.Pine_Grosbeak/Pine_Grosbeak_0008_38486.jpg
+
+  - id: slaty_backed_gull
+    prompt: "a photo of a slaty backed gull"
+    concept: "Slaty backed Gull"
+    coarse: "bird"
+    gt_refs:
+      - 065.Slaty_backed_Gull/Slaty_Backed_Gull_0002_53238.jpg
+      - 065.Slaty_backed_Gull/Slaty_Backed_Gull_0003_796032.jpg
+      - 065.Slaty_backed_Gull/Slaty_Backed_Gull_0006_796014.jpg
+      - 065.Slaty_backed_Gull/Slaty_Backed_Gull_0007_53334.jpg
+      - 065.Slaty_backed_Gull/Slaty_Backed_Gull_0008_53145.jpg
+
+  - id: anna_hummingbird
+    prompt: "a photo of a anna hummingbird"
+    concept: "Anna Hummingbird"
+    coarse: "bird"
+    gt_refs:
+      - 067.Anna_Hummingbird/Anna_Hummingbird_0001_56960.jpg
+      - 067.Anna_Hummingbird/Anna_Hummingbird_0006_55871.jpg
+      - 067.Anna_Hummingbird/Anna_Hummingbird_0017_56954.jpg
+      - 067.Anna_Hummingbird/Anna_Hummingbird_0018_56732.jpg
+      - 067.Anna_Hummingbird/Anna_Hummingbird_0019_57025.jpg
+
+  - id: blue_jay
+    prompt: "a photo of a blue jay"
+    concept: "Blue Jay"
+    coarse: "bird"
+    gt_refs:
+      - 073.Blue_Jay/Blue_Jay_0002_62657.jpg
+      - 073.Blue_Jay/Blue_Jay_0003_63408.jpg
+      - 073.Blue_Jay/Blue_Jay_0006_63504.jpg
+      - 073.Blue_Jay/Blue_Jay_0009_62873.jpg
+      - 073.Blue_Jay/Blue_Jay_0010_61939.jpg
+
+  - id: gray_kingbird
+    prompt: "a photo of a gray kingbird"
+    concept: "Gray Kingbird"
+    coarse: "bird"
+    gt_refs:
+      - 078.Gray_Kingbird/Gray_Kingbird_0001_70224.jpg
+      - 078.Gray_Kingbird/Gray_Kingbird_0003_70305.jpg
+      - 078.Gray_Kingbird/Gray_Kingbird_0004_70293.jpg
+      - 078.Gray_Kingbird/Gray_Kingbird_0005_70103.jpg
+      - 078.Gray_Kingbird/Gray_Kingbird_0006_70268.jpg
+
+  - id: green_kingfisher
+    prompt: "a photo of a green kingfisher"
+    concept: "Green Kingfisher"
+    coarse: "bird"
+    gt_refs:
+      - 080.Green_Kingfisher/Green_Kingfisher_0001_71138.jpg
+      - 080.Green_Kingfisher/Green_Kingfisher_0002_71055.jpg
+      - 080.Green_Kingfisher/Green_Kingfisher_0003_70970.jpg
+      - 080.Green_Kingfisher/Green_Kingfisher_0004_71076.jpg
+      - 080.Green_Kingfisher/Green_Kingfisher_0005_71352.jpg
+
+  - id: horned_lark
+    prompt: "a photo of a horned lark"
+    concept: "Horned Lark"
+    coarse: "bird"
+    gt_refs:
+      - 085.Horned_Lark/Horned_Lark_0001_73835.jpg
+      - 085.Horned_Lark/Horned_Lark_0004_73861.jpg
+      - 085.Horned_Lark/Horned_Lark_0006_73836.jpg
+      - 085.Horned_Lark/Horned_Lark_0009_74646.jpg
+      - 085.Horned_Lark/Horned_Lark_0010_75291.jpg
+
+  - id: nighthawk
+    prompt: "a photo of a nighthawk"
+    concept: "Nighthawk"
+    coarse: "bird"
+    gt_refs:
+      - 092.Nighthawk/Nighthawk_0003_82827.jpg
+      - 092.Nighthawk/Nighthawk_0004_84011.jpg
+      - 092.Nighthawk/Nighthawk_0005_84594.jpg
+      - 092.Nighthawk/Nighthawk_0007_83419.jpg
+      - 092.Nighthawk/Nighthawk_0012_84333.jpg
+
+  - id: ovenbird
+    prompt: "a photo of a ovenbird"
+    concept: "Ovenbird"
+    coarse: "bird"
+    gt_refs:
+      - 099.Ovenbird/Ovenbird_0003_92910.jpg
+      - 099.Ovenbird/Ovenbird_0004_92868.jpg
+      - 099.Ovenbird/Ovenbird_0009_93395.jpg
+      - 099.Ovenbird/Ovenbird_0010_92957.jpg
+      - 099.Ovenbird/Ovenbird_0011_92451.jpg
+
+  - id: american_pipit
+    prompt: "a photo of a american pipit"
+    concept: "American Pipit"
+    coarse: "bird"
+    gt_refs:
+      - 104.American_Pipit/American_Pipit_0001_100225.jpg
+      - 104.American_Pipit/American_Pipit_0002_100023.jpg
+      - 104.American_Pipit/American_Pipit_0006_99857.jpg
+      - 104.American_Pipit/American_Pipit_0007_99808.jpg
+      - 104.American_Pipit/American_Pipit_0008_100390.jpg
+
+  - id: white_necked_raven
+    prompt: "a photo of a white necked raven"
+    concept: "White necked Raven"
+    coarse: "bird"
+    gt_refs:
+      - 108.White_necked_Raven/White_Necked_Raven_0001_797384.jpg
+      - 108.White_necked_Raven/White_Necked_Raven_0002_797370.jpg
+      - 108.White_necked_Raven/White_Necked_Raven_0003_797376.jpg
+      - 108.White_necked_Raven/White_Necked_Raven_0004_102714.jpg
+      - 108.White_necked_Raven/White_Necked_Raven_0005_102653.jpg
+
+  - id: grasshopper_sparrow
+    prompt: "a photo of a grasshopper sparrow"
+    concept: "Grasshopper Sparrow"
+    coarse: "bird"
+    gt_refs:
+      - 121.Grasshopper_Sparrow/Grasshopper_Sparrow_0001_115938.jpg
+      - 121.Grasshopper_Sparrow/Grasshopper_Sparrow_0003_115676.jpg
+      - 121.Grasshopper_Sparrow/Grasshopper_Sparrow_0006_115864.jpg
+      - 121.Grasshopper_Sparrow/Grasshopper_Sparrow_0009_115984.jpg
+      - 121.Grasshopper_Sparrow/Grasshopper_Sparrow_0011_115937.jpg
+
+  - id: henslow_sparrow
+    prompt: "a photo of a henslow sparrow"
+    concept: "Henslow Sparrow"
+    coarse: "bird"
+    gt_refs:
+      - 123.Henslow_Sparrow/Henslow_Sparrow_0002_116930.jpg
+      - 123.Henslow_Sparrow/Henslow_Sparrow_0006_796607.jpg
+      - 123.Henslow_Sparrow/Henslow_Sparrow_0009_796611.jpg
+      - 123.Henslow_Sparrow/Henslow_Sparrow_0010_796600.jpg
+      - 123.Henslow_Sparrow/Henslow_Sparrow_0011_796568.jpg
+
+  - id: lincoln_sparrow
+    prompt: "a photo of a lincoln sparrow"
+    concept: "Lincoln Sparrow"
+    coarse: "bird"
+    gt_refs:
+      - 125.Lincoln_Sparrow/Lincoln_Sparrow_0009_117535.jpg
+      - 125.Lincoln_Sparrow/Lincoln_Sparrow_0010_117263.jpg
+      - 125.Lincoln_Sparrow/Lincoln_Sparrow_0013_117202.jpg
+      - 125.Lincoln_Sparrow/Lincoln_Sparrow_0014_117883.jpg
+      - 125.Lincoln_Sparrow/Lincoln_Sparrow_0017_117432.jpg
+
+  - id: tree_sparrow
+    prompt: "a photo of a tree sparrow"
+    concept: "Tree Sparrow"
+    coarse: "bird"
+    gt_refs:
+      - 130.Tree_Sparrow/Tree_Sparrow_0005_122949.jpg
+      - 130.Tree_Sparrow/Tree_Sparrow_0007_122911.jpg
+      - 130.Tree_Sparrow/Tree_Sparrow_0009_123294.jpg
+      - 130.Tree_Sparrow/Tree_Sparrow_0011_122964.jpg
+      - 130.Tree_Sparrow/Tree_Sparrow_0015_125105.jpg
+
+  - id: vesper_sparrow
+    prompt: "a photo of a vesper sparrow"
+    concept: "Vesper Sparrow"
+    coarse: "bird"
+    gt_refs:
+      - 131.Vesper_Sparrow/Vesper_Sparrow_0002_125454.jpg
+      - 131.Vesper_Sparrow/Vesper_Sparrow_0003_125427.jpg
+      - 131.Vesper_Sparrow/Vesper_Sparrow_0004_125787.jpg
+      - 131.Vesper_Sparrow/Vesper_Sparrow_0005_125440.jpg
+      - 131.Vesper_Sparrow/Vesper_Sparrow_0007_125630.jpg
+
+  - id: cliff_swallow
+    prompt: "a photo of a cliff swallow"
+    concept: "Cliff Swallow"
+    coarse: "bird"
+    gt_refs:
+      - 137.Cliff_Swallow/Cliff_Swallow_0003_133496.jpg
+      - 137.Cliff_Swallow/Cliff_Swallow_0005_133696.jpg
+      - 137.Cliff_Swallow/Cliff_Swallow_0006_133489.jpg
+      - 137.Cliff_Swallow/Cliff_Swallow_0011_133033.jpg
+      - 137.Cliff_Swallow/Cliff_Swallow_0012_133527.jpg
+
+  - id: common_tern
+    prompt: "a photo of a common tern"
+    concept: "Common Tern"
+    coarse: "bird"
+    gt_refs:
+      - 144.Common_Tern/Common_Tern_0001_149721.jpg
+      - 144.Common_Tern/Common_Tern_0004_148977.jpg
+      - 144.Common_Tern/Common_Tern_0009_149609.jpg
+      - 144.Common_Tern/Common_Tern_0012_148477.jpg
+      - 144.Common_Tern/Common_Tern_0014_149194.jpg
+
+  - id: sage_thrasher
+    prompt: "a photo of a sage thrasher"
+    concept: "Sage Thrasher"
+    coarse: "bird"
+    gt_refs:
+      - 150.Sage_Thrasher/Sage_Thrasher_0002_155455.jpg
+      - 150.Sage_Thrasher/Sage_Thrasher_0003_155479.jpg
+      - 150.Sage_Thrasher/Sage_Thrasher_0005_155569.jpg
+      - 150.Sage_Thrasher/Sage_Thrasher_0006_155478.jpg
+      - 150.Sage_Thrasher/Sage_Thrasher_0009_155463.jpg
+
+  - id: warbling_vireo
+    prompt: "a photo of a warbling vireo"
+    concept: "Warbling Vireo"
+    coarse: "bird"
+    gt_refs:
+      - 155.Warbling_Vireo/Warbling_Vireo_0001_158397.jpg
+      - 155.Warbling_Vireo/Warbling_Vireo_0002_158319.jpg
+      - 155.Warbling_Vireo/Warbling_Vireo_0003_158484.jpg
+      - 155.Warbling_Vireo/Warbling_Vireo_0004_158376.jpg
+      - 155.Warbling_Vireo/Warbling_Vireo_0006_158467.jpg
+
+  - id: black_and_white_warbler
+    prompt: "a photo of a black and white warbler"
+    concept: "Black and white Warbler"
+    coarse: "bird"
+    gt_refs:
+      - 159.Black_and_white_Warbler/Black_And_White_Warbler_0001_160352.jpg
+      - 159.Black_and_white_Warbler/Black_And_White_Warbler_0002_160376.jpg
+      - 159.Black_and_white_Warbler/Black_And_White_Warbler_0003_160228.jpg
+      - 159.Black_and_white_Warbler/Black_And_White_Warbler_0007_160758.jpg
+      - 159.Black_and_white_Warbler/Black_And_White_Warbler_0010_160200.jpg
+
+  - id: prairie_warbler
+    prompt: "a photo of a prairie warbler"
+    concept: "Prairie Warbler"
+    coarse: "bird"
+    gt_refs:
+      - 176.Prairie_Warbler/Prairie_Warbler_0002_172622.jpg
+      - 176.Prairie_Warbler/Prairie_Warbler_0007_173081.jpg
+      - 176.Prairie_Warbler/Prairie_Warbler_0009_173022.jpg
+      - 176.Prairie_Warbler/Prairie_Warbler_0010_172547.jpg
+      - 176.Prairie_Warbler/Prairie_Warbler_0011_172744.jpg
+
+  - id: cedar_waxwing
+    prompt: "a photo of a cedar waxwing"
+    concept: "Cedar Waxwing"
+    coarse: "bird"
+    gt_refs:
+      - 186.Cedar_Waxwing/Cedar_Waxwing_0001_179170.jpg
+      - 186.Cedar_Waxwing/Cedar_Waxwing_0002_179071.jpg
+      - 186.Cedar_Waxwing/Cedar_Waxwing_0003_178570.jpg
+      - 186.Cedar_Waxwing/Cedar_Waxwing_0004_179215.jpg
+      - 186.Cedar_Waxwing/Cedar_Waxwing_0006_179394.jpg
+
+  - id: carolina_wren
+    prompt: "a photo of a carolina wren"
+    concept: "Carolina Wren"
+    coarse: "bird"
+    gt_refs:
+      - 195.Carolina_Wren/Carolina_Wren_0001_186455.jpg
+      - 195.Carolina_Wren/Carolina_Wren_0002_186506.jpg
+      - 195.Carolina_Wren/Carolina_Wren_0005_186109.jpg
+      - 195.Carolina_Wren/Carolina_Wren_0006_186742.jpg
+      - 195.Carolina_Wren/Carolina_Wren_0011_186871.jpg

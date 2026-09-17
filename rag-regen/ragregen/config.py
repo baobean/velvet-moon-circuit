@@ -35,6 +35,11 @@ class Case:
     #: (doc 5 §5).
     cohort: str = "bridge"
     gt_refs: list[Path] = field(default_factory=list)
+    #: "<dataset>:<species_key>" into an mmkg_store.store.Store, supplied on
+    #: the case, never inferred (reference-integration design §3). Optional
+    #: here so every pre-existing dataset.yaml without an MMKG store stays
+    #: valid; format is validated downstream by mmkg_store.schema, not here.
+    global_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -154,6 +159,7 @@ def load_dataset(path: Path = DEFAULT_DATASET_PATH) -> DatasetConfig:
             kind=kind,
             cohort=cohort,
             gt_refs=[root / r for r in refs],
+            global_id=raw.get("global_id"),
         ))
     known = {c.coarse for c in cases}
     coarse_refs: dict[str, list[Path]] = {}
