@@ -96,6 +96,51 @@ old `vision.caltech.edu/visipedia-data/...` URL is **404**; use the CaltechDATA 
 `https://data.caltech.edu/records/65de6-vp158/files/CUB_200_2011.tgz`, and fetch it with
 **`curl -L -C -`** — its presigned-S3 redirect **403s `wget -O`**. Segmentations are a
 separate record (`w9d68-gec53`), not needed for Phase 0.
+Extracted 2026-09-17 (11:00, first extraction died silently ~38/200 species in on the
+prior host — re-ran to completion, all 200 species / 11,788 images present) at
+`/mnt/mmlab2024nas/ldtuan/data/partgraph/cub/CUB_200_2011/`.
+
+**CUB Task 6 reconnaissance (Task 6 Step 1, frozen 2026-09-17) — no per-part bounding
+boxes exist**, only point annotations. Layout:
+- `images.txt`: `<image_id> <species_dir>/<filename>`; `image_class_labels.txt`:
+  `<image_id> <class_id>`; `classes.txt`: `<class_id> <NNN.Species_Name>`.
+- `bounding_boxes.txt`: **one whole-bird box per image** — `<image_id> <x> <y> <w> <h>`.
+- `parts/parts.txt`: 15 named point parts (`back, beak, belly, breast, crown, forehead,
+  left eye, left leg, left wing, nape, right eye, right leg, right wing, tail, throat`).
+  `parts/part_locs.txt`: `<image_id> <part_id> <x> <y> <visible>` — a **point**, not a
+  box; `(x,y)=(0,0), visible=0` when absent. The plan text ("deriving part crops from
+  part_locs.txt bounding boxes") was wrong on this point — there are no per-part boxes,
+  only points + the one whole-bird box.
+- Top-level `attributes.txt` (312 lines, outside the tgz, fetched separately) names
+  attributes as `has_bill_shape::curved_(up_or_down)` etc.; per-image labels are in
+  `attributes/image_attribute_labels.txt` (`<image_id> <attribute_id> <is_present>
+  <certainty_id> <time>`), per-class in
+  `attributes/class_attribute_labels_continuous.txt`.
+- Sample image resolution: ~320×223 (varies per image, not fixed).
+
+**Frozen decisions for `build_cub.py`** (crop-derivation rule not specified by the plan —
+resolved here so the implementer doesn't invent it independently):
+- **Part-type grouping** (15 points → 6 crop types): `head` = {beak, crown, forehead,
+  left eye, right eye, throat, nape}; `back` = {back}; `breast` = {breast, belly};
+  `wing` = {left wing, right wing}; `leg` = {left leg, right leg}; `tail` = {tail}.
+- **Source photo per species**: pick the one image with the most visible part-groups
+  (ties broken by lowest `image_id`) as the single "source photo" all of that species'
+  part crops are cut from — keeps crops from one consistent specimen/pose, not mixed
+  across individuals. The medoid is chosen independently over all eligible images via
+  the existing `siglip-centroid-nearest` rule (same as `build_treevill.py`), so medoid
+  and part-crop source photo may differ.
+- **Crop box**: for a part-group, average the `(x,y)` of its *visible* sub-parts in the
+  source photo → crop center. Square crop, `side = max(32, round(0.45 * max(bbox_w,
+  bbox_h)))` using that image's whole-bird box from `bounding_boxes.txt`. Clamp by
+  *shifting* (never shrinking) the box to stay inside the image; if the image is smaller
+  than `side` on an axis, use the full image extent on that axis. A part-group with zero
+  visible sub-parts in the source photo is skipped for that species (not fabricated).
+- **Medoid-selection helper location correction**: the plan says "reuse the existing
+  helper in `build.py`" — it is actually `_centroid_nearest_index` in
+  `ragregen/mmkg_store/build_treevill.py` (`build.py` only orchestrates; `build.py` has
+  no medoid helper of its own).
+- **Encoder**: reuse `ragregen.mmkg_store.embed_index.LOCKED["encoder"]` (same constant
+  `build.py.DEFAULT_ENCODER` aliases) for all embeddings — never the DINO eval encoder.
 
 ## Infra / GPU notes (runs die often — stay portable and resumable)
 
