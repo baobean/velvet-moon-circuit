@@ -1,0 +1,117 @@
+# wk2 GO/NO-GO pilot dataset -- PlantCLEF2024, the 13 frozen species
+# (docs/superpowers/2026-09-17-cvpr-partgraph-handoff.md, "Frozen wk2 pilot
+# species list"). Each case's global_id points into the real store at
+# /mnt/mmlab2024nas/ldtuan/data/partgraph/partgraph_store/plantclef/ (built by
+# build_plantclef.py, Task 6). gt_refs are 2 images per species from the SAME
+# candidate pool the store indexed, but explicitly EXCLUDING every image used as
+# that species' medoid or any part-crop -- so scoring (metrics.dino_identity via
+# metrics.split_refs, heldout_refs=1 from configs/pipeline.yaml) never grades an
+# arm against the exact pixels it was conditioned on. Computed once, frozen here,
+# never touched again once scoring starts (spec section 8 pre-registration).
+name: plantclef_wk2_pilot
+images_root: /mnt/mmlab2024nas/ldtuan/data/partgraph
+cases:
+- id: sisymbrium_polyceratium_l
+  prompt: a Sisymbrium polyceratium L. plant growing outdoors
+  concept: Sisymbrium polyceratium L.
+  coarse: plant
+  global_id: plantclef:1358432
+  gt_refs:
+  - plantclef2024/store_images/1358432/0fbc166f895e130199646000b817292b6086b19a.jpg
+  - plantclef2024/store_images/1358432/20b34ff869a602d06b7f9405a22df048dbaa1411.jpg
+- id: euphorbia_akenocarpa_guss
+  prompt: a Euphorbia akenocarpa Guss. plant growing outdoors
+  concept: Euphorbia akenocarpa Guss.
+  coarse: plant
+  global_id: plantclef:1358523
+  gt_refs:
+  - plantclef2024/wk1_screen_images/1358523/5d63d155bc2b24f61e68fb74c030e8785e5957e9.jpg
+  - plantclef2024/wk1_screen_images/1358523/5e2c6c991c41df465ed6a0611593611d80a0bfb3.jpg
+- id: astragalus_turolensis_pau
+  prompt: a Astragalus turolensis Pau plant growing outdoors
+  concept: Astragalus turolensis Pau
+  coarse: plant
+  global_id: plantclef:1359157
+  gt_refs:
+  - plantclef2024/wk1_screen_images/1359157/476e70d310464b08b9925ce1c0d4251d2b2dc693.jpg
+  - plantclef2024/wk1_screen_images/1359157/7179618156fc961f9ae74651f2111dbb2a4206e7.jpg
+- id: narcissus_viridiflorus_schousb
+  prompt: a Narcissus viridiflorus Schousb. plant growing outdoors
+  concept: Narcissus viridiflorus Schousb.
+  coarse: plant
+  global_id: plantclef:1360973
+  gt_refs:
+  - plantclef2024/store_images/1360973/2f482980af54ccbacda42c3fb32c777fa13ad0be.jpg
+  - plantclef2024/store_images/1360973/3909921e6e2044fcac4d498b01866d6cc0830925.jpg
+- id: desmazeria_sicula_jacq_dumort
+  prompt: a Desmazeria sicula (Jacq.) Dumort. plant growing outdoors
+  concept: Desmazeria sicula (Jacq.) Dumort.
+  coarse: plant
+  global_id: plantclef:1361240
+  gt_refs:
+  - plantclef2024/store_images/1361240/675bcef522abed2c2491fc321ae1f4fd67e8a9f4.jpg
+  - plantclef2024/store_images/1361240/84db7722e553c126a5c465e829b6df22f32a4539.jpg
+- id: rostraria_litorea_all_holub
+  prompt: a Rostraria litorea (All.) Holub plant growing outdoors
+  concept: Rostraria litorea (All.) Holub
+  coarse: plant
+  global_id: plantclef:1361398
+  gt_refs:
+  - plantclef2024/store_images/1361398/90a808c5e45bcb29ea7c71a3553c4f7084c67d3d.jpg
+  - plantclef2024/store_images/1361398/a816047899322644098709a5797eb46b3afc4264.jpg
+- id: taraxacum_oblongatum_dahlst
+  prompt: a Taraxacum oblongatum Dahlst. plant growing outdoors
+  concept: Taraxacum oblongatum Dahlst.
+  coarse: plant
+  global_id: plantclef:1390426
+  gt_refs:
+  - plantclef2024/store_images/1390426/47c0b29bc130e766345d5adc4d3dcd14931f11d7.jpg
+  - plantclef2024/store_images/1390426/711118a381fd7d9c41ef3a17938939b825a86d69.jpg
+- id: euphorbia_graminifolia_vill
+  prompt: a Euphorbia graminifolia Vill. plant growing outdoors
+  concept: Euphorbia graminifolia Vill.
+  coarse: plant
+  global_id: plantclef:1392165
+  gt_refs:
+  - plantclef2024/store_images/1392165/194c655f491639ec31d2c9dbe5674b7cbfccbfef.jpg
+  - plantclef2024/store_images/1392165/3f33df5d30bdcfb6dedc6a5afcab9408c0479fb5.jpg
+- id: campanula_petraea_l
+  prompt: a Campanula petraea L. plant growing outdoors
+  concept: Campanula petraea L.
+  coarse: plant
+  global_id: plantclef:1398374
+  gt_refs:
+  - plantclef2024/store_images/1398374/b6c41cbe94b967bcc5b6aaa5ee2e3e29438a9948.jpg
+  - plantclef2024/store_images/1398374/e4d96832c1a61c954fbd78a0d519c9fa0b79ccd2.jpg
+- id: teucrium_turredanum_losa_rivas_goday
+  prompt: a Teucrium turredanum Losa & Rivas Goday plant growing outdoors
+  concept: Teucrium turredanum Losa & Rivas Goday
+  coarse: plant
+  global_id: plantclef:1564438
+  gt_refs:
+  - plantclef2024/wk1_screen_images/1564438/9aec3f0d6ba592a24263c6c82c5e256a1c849314.jpg
+  - plantclef2024/wk1_screen_images/1564438/f3e39e4a54d7d461d74e1c322ee1f6336ddeb11f.jpg
+- id: agrostis_murbeckii_fouill
+  prompt: a Agrostis × murbeckii Fouill. plant growing outdoors
+  concept: Agrostis × murbeckii Fouill.
+  coarse: plant
+  global_id: plantclef:1647575
+  gt_refs:
+  - plantclef2024/store_images/1647575/12b9d6836b388f40b40f91b5866db6a7b4d781f8.jpg
+  - plantclef2024/store_images/1647575/1526bf89690d840c4721170fa542024f268f3f43.jpg
+- id: hemionitis_guanchica_bolle_christenh
+  prompt: a Hemionitis guanchica (Bolle) Christenh. plant growing outdoors
+  concept: Hemionitis guanchica (Bolle) Christenh.
+  coarse: plant
+  global_id: plantclef:1722699
+  gt_refs:
+  - plantclef2024/store_images/1722699/3517c0f35f446dc47ab7765972aa277c3ec29443.jpg
+  - plantclef2024/store_images/1722699/b59e6770d40fd0e6b4349da4cf215e9f1218f21d.jpg
+- id: thapsia_scabra_cav_simonsen_rnsted_weitzel_spalik
+  prompt: a Thapsia scabra (Cav.) Simonsen, Rønsted, Weitzel & Spalik plant growing outdoors
+  concept: Thapsia scabra (Cav.) Simonsen, Rønsted, Weitzel & Spalik
+  coarse: plant
+  global_id: plantclef:1744638
+  gt_refs:
+  - plantclef2024/store_images/1744638/121cc5db4bf7c43d18300f04dc07798a93fd33db.jpg
+  - plantclef2024/store_images/1744638/3a8a32b6ebed83a042878d342f245eda529d6042.jpg
