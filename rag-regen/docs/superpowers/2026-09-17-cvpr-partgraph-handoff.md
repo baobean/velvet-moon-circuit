@@ -129,6 +129,64 @@ boxes exist**, only point annotations. Layout:
   `attributes/class_attribute_labels_continuous.txt`.
 - Sample image resolution: ~320×223 (varies per image, not fixed).
 
+**PlantCLEF CSV fully downloaded and re-verified 2026-09-17 (later same day)** — 786 MB,
+1,408,033 data rows. The `field larger than field limit` error flagged earlier was just
+Python's default `csv.field_size_limit()` (131072 bytes), not row corruption —
+`csv.field_size_limit(sys.maxsize)` before opening parses the whole file cleanly, no
+skipped/malformed rows. Full-file organ counts (supersede the 72%-partial estimate above):
+`leaf` 340,852, `flower` 389,251, `fruit` 165,855, `bark` 88,507, `habit` 355,732, `branch`
+59,632, `scan` 8,204 — all seven organs healthy, branch/scan no longer look sparse at full
+scale. **`build_plantclef.py` must still `csv.field_size_limit(sys.maxsize)`, but the
+defensive skip-malformed-row path is now lower priority** (no malformed rows found in the
+full file); keep it as a guard, not the primary concern.
+
+**Correction — `url` is NOT always `bs.plantnet.org`.** PlantCLEF2024 aggregates multiple
+occurrence platforms (GBIF-linked): observed hosts include `bs.plantnet.org/image/o/<hash>`,
+`inaturalist-open-data.s3.amazonaws.com/photos/<id>/original.jpg(eg)`, and
+`observation.org/photos/<id>.jpg`. `build_plantclef.py`'s fetch step must do a generic
+HTTP GET on the `url` column verbatim (`requests.get(url, timeout=...)` with retry), not
+assume a single host or reconstruct the URL from `image_name`.
+
+**Frozen wk2 pilot species list (13, decided 2026-09-17, after wk1 screen)** — drawn from
+the wk1 screen's 30-species PlantCLEF sample per
+`docs/superpowers/2026-09-17-wk1-rarity-headroom-screen-finding.md`: the 6-species
+confusable pocket (leave-one-out retrieval acc. ≤0.60) plus the next-weakest tier
+(acc.=0.80), **minus `Marsilea batardae Launert`** — dropped under a new eligibility
+criterion frozen here (applied before any FLUX generation or scoring, so it is a screening
+criterion like the wk1 gate, not post-hoc cherry-picking): **a species needs ≥2 distinct
+`organ` labels in the CSV to test the mechanism at all** — `Marsilea batardae` has only
+`habit` (10/10 rows), so its `partgraph` arm would degrade to a single crop, identical in
+kind to `single_medoid`, contributing no signal to the GAIN test. No replacement was drawn
+(13 is close enough to "~15" and preserves the confusable-pocket provenance; a fresh draw
+would mix an unscreened species into a pre-registered list). Per-species organ counts
+(full CSV, confirms ≥2 organs and 6-20 images each, this is the ONLY source of images —
+do not add extra images beyond what these counts list):
+
+| species | species_id | n_images | organs |
+|---|---|---|---|
+| Sisymbrium polyceratium L. | 1358432 | 19 | habit 6, branch 9, leaf 1, fruit 1, scan 2 |
+| Narcissus viridiflorus Schousb. | 1360973 | 19 | leaf 1, flower 11, branch 4, habit 1, fruit 2 |
+| Campanula petraea L. | 1398374 | 10 | leaf 2, flower 2, branch 2, habit 4 |
+| Rostraria litorea (All.) Holub | 1361398 | 13 | flower 2, habit 4, fruit 4, bark 1, leaf 1, branch 1 |
+| Euphorbia akenocarpa Guss. | 1358523 | 6 | branch 5, habit 1 |
+| Astragalus turolensis Pau | 1359157 | 6 | habit 2, flower 4 |
+| Taraxacum oblongatum Dahlst. | 1390426 | 9 | habit 4, flower 2, fruit 3 |
+| Euphorbia graminifolia Vill. | 1392165 | 15 | leaf 7, flower 2, bark 1, branch 4, habit 1 |
+| Agrostis × murbeckii Fouill. | 1647575 | 20 | bark 10, habit 6, branch 4 |
+| Desmazeria sicula (Jacq.) Dumort. | 1361240 | 14 | flower 4, fruit 4, leaf 1, habit 4, scan 1 |
+| Teucrium turredanum Losa & Rivas Goday | 1564438 | 7 | leaf 1, habit 3, branch 2, flower 1 |
+| Thapsia scabra (...) | 1744638 | 20 | leaf 3, habit 9, flower 1, branch 3, fruit 3, bark 1 |
+| Hemionitis guanchica (Bolle) Christenh. | 1722699 | 11 | habit 5, leaf 6 |
+
+Match rows by the CSV's `species` column string (exact match against the names above, e.g.
+`"Sisymbrium polyceratium L."`) — the `species_id` in the table is for cross-checking, not
+matching (a `species_id` maps 1:1 to a `species` string in this CSV, confirmed above). Five
+of these species' first 5 images are already staged at
+`/mnt/mmlab2024nas/ldtuan/data/partgraph/plantclef2024/wk1_screen_images/<species_id>/` from
+the wk1 fidelity check — reuse those files instead of re-fetching (check existence before
+GET), but each species needs its FULL image set per the table above (wk1 only staged 5/species),
+so most images per species still need fetching.
+
 **Frozen decisions for `build_cub.py`** (crop-derivation rule not specified by the plan —
 resolved here so the implementer doesn't invent it independently):
 - **Part-type grouping** (15 points → 6 crop types): `head` = {beak, crown, forehead,
