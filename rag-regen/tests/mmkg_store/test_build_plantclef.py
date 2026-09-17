@@ -1,9 +1,11 @@
 import csv
+import functools
 import hashlib
 from pathlib import Path
 
 import numpy as np
 import pytest
+import requests
 from PIL import Image
 
 from ragregen.mmkg_store import build_plantclef as bp
@@ -262,3 +264,124 @@ def test_stage_image_returns_none_and_does_not_raise_on_fetch_failure(tmp_path):
 
     assert path is None
     assert fetcher.calls == [row["url"]]
+
+
+# --- unit tests: _default_fetch retry/backoff (Important fix, review round 1) ----
+
+class _FakeResponse:
+    """Minimal stand-in for ``requests.Response`` -- just what ``_default_fetch``
+    touches (``status_code``, ``content``, ``raise_for_status``)."""
+
+    def __init__(self, status_code=200, content=b"fake-bytes"):
+        self.status_code = status_code
+        self.content = content
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            exc = requests.exceptions.HTTPError(f"{self.status_code} error")
+            exc.response = self
+            raise exc
+
+
+def test_default_fetch_retries_transient_failure_then_succeeds(tmp_path, monkeypatch):
+    """A connection error on attempt 1 followed by success on attempt 2 must
+    be recovered -- the retry loop, not a raised exception or a permanent
+    skip."""
+    calls = {"n": 0}
+
+    def fake_get(url, timeout):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise requests.exceptions.ConnectionError("simulated transient failure")
+        return _FakeResponse(status_code=200, content=b"ok-bytes")
+
+    monkeypatch.setattr(requests, "get", fake_get)
+    dest = tmp_path / "out" / "img.jpg"
+
+    bp._default_fetch("https://example.org/img.jpg", dest, backoff_seconds=0)
+
+    assert calls["n"] == 2
+    assert dest.read_bytes() == b"ok-bytes"
+
+
+def test_default_fetch_persistent_transient_failure_raises_after_bounded_retries(
+    tmp_path, monkeypatch
+):
+    """A failure that never clears must NOT retry forever -- it should raise
+    after exactly ``max_attempts`` tries, preserving the skip-and-continue
+    contract via ``_stage_image``'s catch-all (tested below)."""
+    calls = {"n": 0}
+
+    def fake_get(url, timeout):
+        calls["n"] += 1
+        raise requests.exceptions.Timeout("simulated persistent failure")
+
+    monkeypatch.setattr(requests, "get", fake_get)
+    dest = tmp_path / "out" / "img.jpg"
+
+    with pytest.raises(requests.exceptions.Timeout):
+        bp._default_fetch(
+            "https://example.org/img.jpg", dest, max_attempts=3, backoff_seconds=0
+        )
+
+    assert calls["n"] == 3  # bounded -- not unbounded retry
+    assert not dest.exists()
+
+
+def test_default_fetch_retries_5xx_then_succeeds(tmp_path, monkeypatch):
+    calls = {"n": 0}
+
+    def fake_get(url, timeout):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return _FakeResponse(status_code=503)
+        return _FakeResponse(status_code=200, content=b"ok-bytes")
+
+    monkeypatch.setattr(requests, "get", fake_get)
+    dest = tmp_path / "out" / "img.jpg"
+
+    bp._default_fetch("https://example.org/img.jpg", dest, backoff_seconds=0)
+
+    assert calls["n"] == 2
+    assert dest.read_bytes() == b"ok-bytes"
+
+
+def test_default_fetch_does_not_retry_4xx(tmp_path, monkeypatch):
+    """A 404 will not fix itself -- must raise on the first attempt, no retry."""
+    calls = {"n": 0}
+
+    def fake_get(url, timeout):
+        calls["n"] += 1
+        return _FakeResponse(status_code=404)
+
+    monkeypatch.setattr(requests, "get", fake_get)
+    dest = tmp_path / "out" / "img.jpg"
+
+    with pytest.raises(requests.exceptions.HTTPError):
+        bp._default_fetch(
+            "https://example.org/img.jpg", dest, max_attempts=3, backoff_seconds=0
+        )
+
+    assert calls["n"] == 1
+
+
+def test_stage_image_skips_and_continues_after_default_fetch_exhausts_retries(
+    tmp_path, monkeypatch
+):
+    """Integration of the fix with the existing skip-and-continue design:
+    once ``_default_fetch``'s own retries are exhausted, ``_stage_image``
+    still returns ``None`` rather than raising (same contract as the
+    ``_FakeFetcher`` case above, now exercised through the real retry path)."""
+
+    def fake_get(url, timeout):
+        raise requests.exceptions.ConnectionError("simulated persistent failure")
+
+    monkeypatch.setattr(requests, "get", fake_get)
+    wk1_dir = tmp_path / "wk1"
+    store_dir = tmp_path / "store"
+    row = ROWS[6]  # c_img1.jpg
+    fetch_fn = functools.partial(bp._default_fetch, backoff_seconds=0)
+
+    path = bp._stage_image(row, "900003", wk1_dir, store_dir, fetch_fn)
+
+    assert path is None

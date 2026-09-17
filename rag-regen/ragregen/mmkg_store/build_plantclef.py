@@ -138,19 +138,47 @@ def parse_plantclef_rows(csv_path, species_names) -> dict[str, list[dict]]:
 # Image staging (local reuse + generic-host fetch)
 # ---------------------------------------------------------------------------
 
-def _default_fetch(url: str, dest_path) -> None:
+def _default_fetch(url: str, dest_path, *, max_attempts: int = 3, backoff_seconds: float = 1.0) -> None:
     """Generic GET on ``url`` verbatim -- never reconstructs or assumes a host
     (the CSV's `url` column spans `bs.plantnet.org`,
     `inaturalist-open-data.s3.amazonaws.com`, `observation.org`, ...).
-    Raises on any failure (timeout, HTTP error); the caller catches and logs.
+
+    Retries up to ``max_attempts`` total on connection/timeout errors and 5xx
+    responses, with exponential backoff (``backoff_seconds``, then ``2x``,
+    ``4x``, ...) between attempts -- a single transient blip (timeout, brief
+    5xx) should not permanently skip an image. A 4xx response is NOT retried
+    (a 404 will not fix itself) and raises immediately. Raises on final
+    failure (transient error persisting past ``max_attempts``, or any 4xx);
+    the caller (``_stage_image``) catches and logs, preserving the existing
+    skip-and-continue contract.
     """
+    import time
+
     import requests
 
     dest_path = Path(dest_path)
     dest_path.parent.mkdir(parents=True, exist_ok=True)
-    resp = requests.get(url, timeout=30)
-    resp.raise_for_status()
-    dest_path.write_bytes(resp.content)
+
+    for attempt in range(1, max_attempts + 1):
+        try:
+            resp = requests.get(url, timeout=30)
+            resp.raise_for_status()
+        except requests.exceptions.HTTPError as exc:
+            status = exc.response.status_code if exc.response is not None else None
+            if status is not None and 400 <= status < 500:
+                raise  # client error -- retrying will not help
+            if attempt == max_attempts:
+                raise
+            time.sleep(backoff_seconds * (2 ** (attempt - 1)))
+            continue
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+            if attempt == max_attempts:
+                raise
+            time.sleep(backoff_seconds * (2 ** (attempt - 1)))
+            continue
+
+        dest_path.write_bytes(resp.content)
+        return
 
 
 def _stage_image(row: dict, species_id: str, wk1_dir, store_dir, fetch_fn) -> str | None:
