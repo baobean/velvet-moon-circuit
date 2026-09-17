@@ -81,8 +81,19 @@ iNat-birds attribute-verifier; medoid-fidelity pilot). See those findings under
 `https://lab.plantnet.org/LifeCLEF/PlantCLEF2024/single_plant_training_data/PlantCLEF2024singleplanttrainingdata.csv`.
 Columns: `image_name;organ;species_id;obs_id;license;partner;author;altitude;latitude;
 longitude;gbif_species_id;species;genus;family;dataset;publisher;references;url;learn_tag;
-image_backup_url`. **Key wins:** `organ` ∈ {leaf,flower,fruit,bark,habit,...} = `part-of`
-for free; `species/genus/family` = taxonomy hubs for free; **`url`
+image_backup_url`. **Key wins:** `organ` = `part-of` for free — **confirmed vocabulary
+from the real (72%-downloaded) CSV, 77,786 rows scanned 2026-09-17: `{leaf, flower,
+fruit, bark, habit, branch, scan}`** (7 organ types, not the guessed 5); counts so far
+skew toward leaf/flower (~21-22K each), habit ~15.5K, fruit ~9.7K, bark ~7.1K, branch/scan
+rare (677/596) — branch and scan may be too sparse for a reliable per-species part crop,
+recheck once the full CSV is in. **Gotcha found during this scan:** `csv.DictReader` hit
+`field larger than field limit` at row 77,786 — not yet root-caused (could be the
+in-progress download's truncated tail, or a genuine unescaped `"` inside a free-text
+`author`/`references` field corrupting quote balance downstream). **`build_plantclef.py`
+must parse defensively** — catch/skip a malformed row rather than let one bad quote
+abort the whole build — and this must be re-verified once the CSV finishes downloading
+(currently still running self-healing on the original host, see Infra section). `species/
+genus/family` = taxonomy hubs for free; **`url`
 (`bs.plantnet.org/image/o/<hash>`) is a per-image download URL → fetch only our chosen
 subset, DO NOT download the 160/281 GB tar.** `learn_tag` = train/test split.
 PlantNet's server throttles the tar (and the CSV) to KB/s — use aria2c `-x16` or fetch
