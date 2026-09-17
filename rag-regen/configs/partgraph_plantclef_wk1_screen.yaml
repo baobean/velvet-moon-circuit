@@ -1,0 +1,338 @@
+# Wk1 rarity/headroom screen dataset -- PlantCLEF2024, 30 long-tail species
+# (6-20 images each, seed=0/1). Text-only FLUX draft: does it FAIL on these
+# genuinely rare taxa (spec section 8)? Paired with the SigLIP retrieval-
+# headroom check (scripts/retrieval_headroom_screen.py). PlantCLEF is the
+# LOAD-BEARING dataset per the design doc -- this result is the one that matters.
+
+name: plantclef_wk1_screen
+images_root: /mnt/mmlab2024nas/ldtuan/data/partgraph/plantclef2024/wk1_screen_images
+
+cases:
+  - id: sisymbrium_polyceratium_l
+    prompt: "a Sisymbrium polyceratium L. plant growing outdoors"
+    concept: "Sisymbrium polyceratium L."
+    coarse: "plant"
+    gt_refs:
+      - 1358432/180fd9f2e1148e3e8854163341daf37326c9a511.jpg
+      - 1358432/1d6b7713d656afb9a51a65aa95a75acdbb1154a0.jpg
+      - 1358432/1ed6b7bb8ad6957f023415b3b5b7d5a55407ec7a.jpg
+      - 1358432/6aeee0eb3dd54510a3f02b8c841f34167c718317.jpg
+      - 1358432/be50fb0cdefb2b4aecacb955c03830ff007a767f.jpg
+
+  - id: euphorbia_akenocarpa_guss
+    prompt: "a Euphorbia akenocarpa Guss. plant growing outdoors"
+    concept: "Euphorbia akenocarpa Guss."
+    coarse: "plant"
+    gt_refs:
+      - 1358523/5c093a3c8b8a29797e3cf1abcaca62de48f3afd5.jpg
+      - 1358523/5d63d155bc2b24f61e68fb74c030e8785e5957e9.jpg
+      - 1358523/5e2c6c991c41df465ed6a0611593611d80a0bfb3.jpg
+      - 1358523/929f5cb8b3d8c8b72aa5164d97f90a11e87d17af.jpg
+      - 1358523/c1ae9bfcad56def3f45f3aa5d46bcc51eefcdddb.jpg
+
+  - id: astragalus_turolensis_pau
+    prompt: "a Astragalus turolensis Pau plant growing outdoors"
+    concept: "Astragalus turolensis Pau"
+    coarse: "plant"
+    gt_refs:
+      - 1359157/45fd6fc7493efe147e93d78d99b3b7ad9f315190.jpg
+      - 1359157/476e70d310464b08b9925ce1c0d4251d2b2dc693.jpg
+      - 1359157/5e1853790d360becfdb5f775f511528093848637.jpg
+      - 1359157/7179618156fc961f9ae74651f2111dbb2a4206e7.jpg
+      - 1359157/f6d9ef94ee2aaf29b10605952a2e9046d8c6bf76.jpg
+
+  - id: narcissus_viridiflorus_schousb
+    prompt: "a Narcissus viridiflorus Schousb. plant growing outdoors"
+    concept: "Narcissus viridiflorus Schousb."
+    coarse: "plant"
+    gt_refs:
+      - 1360973/0baea1bfc57f61d0d1f2707efbe2735a72d8f778.jpg
+      - 1360973/4bbbe6be2dd06f1838bca32287be7f56192b1a53.jpg
+      - 1360973/583cb7da7a3fa91a673e54dc51e0cc804259a993.jpg
+      - 1360973/5906747521ec96ca77bbe813e30ffca651629ad7.jpg
+      - 1360973/be05bb12996b1312c8e38503b4591a9c75c61602.jpg
+
+  - id: desmazeria_sicula_jacq_dumort
+    prompt: "a Desmazeria sicula (Jacq.) Dumort. plant growing outdoors"
+    concept: "Desmazeria sicula (Jacq.) Dumort."
+    coarse: "plant"
+    gt_refs:
+      - 1361240/22f05db769b572400d3649badff66f04bedcf695.jpg
+      - 1361240/5273cfffe2ee3a999b9fdf30e3fefb37b29e47f0.jpg
+      - 1361240/ce544c222fb3c7cc014870ae2a61cd0ab02e052e.jpg
+      - 1361240/d9f5db3ef654536100244ddaeff4b23a1072113b.jpg
+      - 1361240/f30656071a9328c8d7c707750496660c0d8493b4.jpg
+
+  - id: poa_ligulata_boiss
+    prompt: "a Poa ligulata Boiss. plant growing outdoors"
+    concept: "Poa ligulata Boiss."
+    coarse: "plant"
+    gt_refs:
+      - 1361374/1f2f9ce74d1fb82be99d5073ea313e6ffd0bf86a.jpg
+      - 1361374/57590af74dc94a90494cb71cc490dc8cb1d24821.jpg
+      - 1361374/a4ab81061bcb1d5256b33a015c599cea703868c8.jpg
+      - 1361374/b68a6533653bae8aea2f29afd49a1d882c9df88f.jpg
+      - 1361374/faa5c222ecb6b6d4343aee7a354bb82e5b4403d3.jpg
+
+  - id: rostraria_litorea_all_holub
+    prompt: "a Rostraria litorea (All.) Holub plant growing outdoors"
+    concept: "Rostraria litorea (All.) Holub"
+    coarse: "plant"
+    gt_refs:
+      - 1361398/6ff3df392bf7b76b8225c1c6eb3735d64714085e.jpg
+      - 1361398/9c9d720b1ed4301e0707d14d441374c6315663dd.jpg
+      - 1361398/c054e0c829806835769a8a895123faa01333d81a.jpg
+      - 1361398/c3d09db147a5a8553101c53a9926ae27f2532763.jpg
+      - 1361398/ceefc564375bb0b1ef0ef0248c0758a9797c6560.jpg
+
+  - id: schoenoplectiella_erecta_poir_lye
+    prompt: "a Schoenoplectiella erecta (Poir.) Lye plant growing outdoors"
+    concept: "Schoenoplectiella erecta (Poir.) Lye"
+    coarse: "plant"
+    gt_refs:
+      - 1362195/14bd5021de11056f114066b90cd236cae499a720.jpg
+      - 1362195/582505acc768fa961adeb10e8601edee11fbc53f.jpg
+      - 1362195/948b477d2b3fca9274923abdcc1684cfac4333c0.jpg
+      - 1362195/962b2945316f40150e10c17ded1e5144e85033ba.jpg
+      - 1362195/be1a0ce26069c589eb0d5774153ec05071d6e3b2.jpg
+
+  - id: rotala_indica_willd_koehne
+    prompt: "a Rotala indica (Willd.) Koehne plant growing outdoors"
+    concept: "Rotala indica (Willd.) Koehne"
+    coarse: "plant"
+    gt_refs:
+      - 1376496/3dbc10b3a3019f699aa07dab0b4f4df5e372eb25.jpg
+      - 1376496/711b1cff65bdcdfe6fe937a9ad4334aad8ce4a32.jpg
+      - 1376496/aa1b6d8ef86032477457911574be1169a4d847bd.jpg
+      - 1376496/b81ee35c3eeba4c7fed0e4d1fd41a65f72dd0f39.jpg
+      - 1376496/c52c4877b4530e81d720bf6e1f3fa2bcd6760625.jpg
+
+  - id: taraxacum_oblongatum_dahlst
+    prompt: "a Taraxacum oblongatum Dahlst. plant growing outdoors"
+    concept: "Taraxacum oblongatum Dahlst."
+    coarse: "plant"
+    gt_refs:
+      - 1390426/019e769017d4041e034a98add1fd4eb39772e7fb.jpg
+      - 1390426/0f677ea392c5cff4c31a2f6aa1a54461516e30e4.jpg
+      - 1390426/27dfb0f0f33fdc1c2ad8055d91cc979e2955e77e.jpg
+      - 1390426/6c67d30aff4e183183066e4027090c00416864de.jpg
+      - 1390426/de940fe1084cf1d4d4900fdf2489cdcf4ee99fbe.jpg
+
+  - id: crepis_rhaetica_hegetschw
+    prompt: "a Crepis rhaetica Hegetschw. plant growing outdoors"
+    concept: "Crepis rhaetica Hegetschw."
+    coarse: "plant"
+    gt_refs:
+      - 1391459/1af04caa94234fb67cb195e24d98f2339c56e225.jpg
+      - 1391459/3ed01a015e95160bd349c2231c93b4de1df3aebe.jpg
+      - 1391459/58d2c89efb1e9c557ee86993892654701af8ea89.jpg
+      - 1391459/f090734071a3178c60d0d6be3794946fcc7a52c0.jpg
+      - 1391459/f5652fb13dceadaee21029996cc1092d92b43a00.jpg
+
+  - id: erigeron_paolii_gamisans
+    prompt: "a Erigeron paolii Gamisans plant growing outdoors"
+    concept: "Erigeron paolii Gamisans"
+    coarse: "plant"
+    gt_refs:
+      - 1392051/3a6091fba4c89d8bf7f6fe820169b9e59b74421d.jpg
+      - 1392051/89813f8304e946343ade92c89a008cd0e7139220.jpg
+      - 1392051/9f7ba392299d8e61452ab7dfc2658110d8707d80.jpg
+      - 1392051/a9a531d59259994be5dd55fa7d7eb89f32f7ab7a.jpg
+      - 1392051/ed48ccb22dcd41590a9c05107b3834b3885054e5.jpg
+
+  - id: euphorbia_graminifolia_vill
+    prompt: "a Euphorbia graminifolia Vill. plant growing outdoors"
+    concept: "Euphorbia graminifolia Vill."
+    coarse: "plant"
+    gt_refs:
+      - 1392165/167e02318bad459244f16605debaade7a5a38d2f.jpg
+      - 1392165/2d6faf634b2af7308395e7b15853ee2f5e297655.jpg
+      - 1392165/44560d606d59a5c5c177f45ac72cedae1143790d.jpg
+      - 1392165/cdcfd3ee0a9ec5612d5123342f5b34f434182054.jpg
+      - 1392165/d6cfc1b9ea5d5f7777c6fb7ebe731aee44a285cf.jpg
+
+  - id: alchemilla_subsericea_reut
+    prompt: "a Alchemilla subsericea Reut. plant growing outdoors"
+    concept: "Alchemilla subsericea Reut."
+    coarse: "plant"
+    gt_refs:
+      - 1392291/1cee439ea40d9c7166e8ff7bd80485e60fc17ff2.jpg
+      - 1392291/29f71a2f5cd544e83ef6bf2935e18fd013a646dd.jpg
+      - 1392291/8a6765f2c8c6c23f497642c10045114e90dd7e74.jpg
+      - 1392291/b466e8920256dae05cc97aedcbbf8a0f854a529e.jpg
+      - 1392291/c03451dabd992fdcb1be776b7f9d4c24bf40010e.jpg
+
+  - id: scabiosa_corsica_litard_gamisans
+    prompt: "a Scabiosa corsica (Litard.) Gamisans plant growing outdoors"
+    concept: "Scabiosa corsica (Litard.) Gamisans"
+    coarse: "plant"
+    gt_refs:
+      - 1396059/01d9e9cd5e415953ca03952f77f1f29251ce4caf.jpg
+      - 1396059/3ffe69ebc129f33f003156c8713b9bb612055a44.jpg
+      - 1396059/9a1f1a32e12adb25ba3a6cba5f8e0a2deb46c697.jpg
+      - 1396059/b48295b30eaa7424c3662640346a9af85e9e646f.jpg
+
+  - id: campanula_petraea_l
+    prompt: "a Campanula petraea L. plant growing outdoors"
+    concept: "Campanula petraea L."
+    coarse: "plant"
+    gt_refs:
+      - 1398374/6c1bd50267e59b992e9e87b5fd5883caea0479b2.jpg
+      - 1398374/762eb6d1975134b263ea83fb2fcf385778647f2f.jpg
+      - 1398374/a341a408230ff8f7d17b90482d9ab3e8a4e17bdc.jpg
+      - 1398374/b8babc1ca53673b5bd4917ef9458648e47ebe53e.jpg
+      - 1398374/f856d7acfea6e40e09e586e5c019cc6adc358607.jpg
+
+  - id: marsilea_batardae_launert
+    prompt: "a Marsilea batardae Launert plant growing outdoors"
+    concept: "Marsilea batardae Launert"
+    coarse: "plant"
+    gt_refs:
+      - 1398699/3b5314ab8ce9f72b4f8a20326a0b98f0384c545e.jpg
+      - 1398699/5ad8b49ffd8af7868416884e5f7d6adae207093f.jpg
+      - 1398699/739be25d17b1baef31c4acb60014411793ae4472.jpg
+      - 1398699/884faca93d0708d1a926728fcfdbe9362e0e41bd.jpg
+      - 1398699/9f2439d285fe179e2492b2a0bd5782e4f7c924fd.jpg
+
+  - id: crepis_novoana_s_ortiz_x_so_ora_rodr_oubi_a
+    prompt: "a Crepis novoana S.Ortiz, X.Soñora & Rodr.Oubiña plant growing outdoors"
+    concept: "Crepis novoana S.Ortiz, X.Soñora & Rodr.Oubiña"
+    coarse: "plant"
+    gt_refs:
+      - 1505542/34e535db729273ffcce6e53b1f7cecf229a51385.jpg
+      - 1505542/561fed0aac38265812c07015b813665a3542e2ee.jpg
+      - 1505542/78ba76ebd5004946fb628b375055102ae5a0b54f.jpg
+      - 1505542/8f6b0463f577aecc26649b07949e2a94522d83e9.jpg
+      - 1505542/c918691c4d1fdb95a7a6f0cda534f6da9584ae12.jpg
+
+  - id: lactuca_longidentata_moris_ex_dc
+    prompt: "a Lactuca longidentata Moris ex DC. plant growing outdoors"
+    concept: "Lactuca longidentata Moris ex DC."
+    coarse: "plant"
+    gt_refs:
+      - 1513193/03f63aa752311294a1b7f8888f7da7a810f3f675.jpg
+      - 1513193/77705181057ac9972c53eb6ac87a9ea028e09d55.jpg
+      - 1513193/b6ab71bf73fcc8fa9e68305380113f819bf884d7.jpg
+      - 1513193/cf7ae3fe67c9aa791ddd85897e39ffbbc7b4a32c.jpg
+      - 1513193/f6025e9e465729ccd8fbb534af4663f7c5b3d3e0.jpg
+
+  - id: teucrium_turredanum_losa_rivas_goday
+    prompt: "a Teucrium turredanum Losa & Rivas Goday plant growing outdoors"
+    concept: "Teucrium turredanum Losa & Rivas Goday"
+    coarse: "plant"
+    gt_refs:
+      - 1564438/046a819600bd095e6413d12c4bc35afae0803107.jpg
+      - 1564438/3caa25c2ef427d3b3b8c4e9ab413a2e1de441c38.jpg
+      - 1564438/9aec3f0d6ba592a24263c6c82c5e256a1c849314.jpg
+      - 1564438/f3e39e4a54d7d461d74e1c322ee1f6336ddeb11f.jpg
+      - 1564438/fdcbb529009f7fd6852942a7455352af87b40239.jpg
+
+  - id: gagea_lusitanica_a_terracc
+    prompt: "a Gagea lusitanica A.Terracc. plant growing outdoors"
+    concept: "Gagea lusitanica A.Terracc."
+    coarse: "plant"
+    gt_refs:
+      - 1588802/191d5a312ef236b81a5c8ccab41790dda74e467b.jpg
+      - 1588802/20d2d77fe6f740981cc0d2df6948c8c43019d3cf.jpg
+      - 1588802/7ce86c38664a26991ca2e54416b66ff63dff1be4.jpg
+      - 1588802/92866540dbabb91f6e57dfbd1cc2108ebb0212af.jpg
+      - 1588802/efc9b77f4f45ef3d7f686b9ca6c4c3ccc35e4143.jpg
+
+  - id: agrostis_murbeckii_fouill
+    prompt: "a Agrostis × murbeckii Fouill. plant growing outdoors"
+    concept: "Agrostis × murbeckii Fouill."
+    coarse: "plant"
+    gt_refs:
+      - 1647575/055896689614dd4d5cf1d73f9082e73f1bfb9312.jpg
+      - 1647575/46271059a73428dc2926182f787a71155b10d4ef.jpg
+      - 1647575/4a90294b9b477c47eeb40a0a53535292c84b0a95.jpg
+      - 1647575/52a33d5e6e8a62f3cf1d2af0c3732ffe3deceb47.jpg
+      - 1647575/94bdbb70e36952a954fc07b2bcef85074975f7a3.jpg
+
+  - id: hemionitis_guanchica_bolle_christenh
+    prompt: "a Hemionitis guanchica (Bolle) Christenh. plant growing outdoors"
+    concept: "Hemionitis guanchica (Bolle) Christenh."
+    coarse: "plant"
+    gt_refs:
+      - 1722699/071cfc142e023c53f9c9fe2bcb47c3585640cea1.jpg
+      - 1722699/2e8ca7227838a38a94abfc8a2d5a90d8ad8dc5dd.jpg
+      - 1722699/556f47bebecc5f83322325c4f2a8141ae8ac0997.jpg
+      - 1722699/8b611ae1643281abdb71d9bad7ab5d14c199f240.jpg
+      - 1722699/c1093b936cdc511951436f2ba70dbcf53f5caa61.jpg
+
+  - id: dryopteris_complexa_fraser_jenk
+    prompt: "a Dryopteris × complexa Fraser-Jenk. plant growing outdoors"
+    concept: "Dryopteris × complexa Fraser-Jenk."
+    coarse: "plant"
+    gt_refs:
+      - 1739061/5db9d104d3200a0ea6a9e6740744b393aca7a802.jpg
+      - 1739061/9374bad4b2cfac11a5d2bf2e61cedce8ee556053.jpg
+      - 1739061/c3587abf077b0e94a2a7197639da1fa5010b8809.jpg
+      - 1739061/e9c772280aacd5db549940620674c83c0b62e351.jpg
+      - 1739061/ffd00db4cb53358afa1be1cab6f630e9ce773c68.jpg
+
+  - id: polystichum_illyricum_hahne
+    prompt: "a Polystichum × illyricum Hahne plant growing outdoors"
+    concept: "Polystichum × illyricum Hahne"
+    coarse: "plant"
+    gt_refs:
+      - 1739066/324606b8fc9d83416db79b227d3db04d90b141f9.jpg
+      - 1739066/80a9cfa1acca0a5b811977bae642c19236cae151.jpg
+      - 1739066/96ffe925c0adde85b8ce70a279397e777ebf763b.jpg
+      - 1739066/a58551ca9fda60f2d7d6cfbd317ee3194b6f90cf.jpg
+      - 1739066/aef09c6373aa9035036fcf14a78251e2b9db0504.jpg
+
+  - id: quercus_turneri_willd
+    prompt: "a Quercus × turneri Willd. plant growing outdoors"
+    concept: "Quercus × turneri Willd."
+    coarse: "plant"
+    gt_refs:
+      - 1744146/0a701ef6e0813ee594af764941109addbdb49043.jpg
+      - 1744146/161eb46435ea652be91d96b9c88f94b388e5e514.jpg
+      - 1744146/2f90fa804286b705b8d7a4e2191e3fba66ab63f9.jpg
+      - 1744146/c98a7d27ef173c83cec47cfd9947143124e0bb61.jpg
+      - 1744146/f989fee75445432526ef6e53c146e5771cf4a39c.jpg
+
+  - id: alyssum_gallaecicum_s_ortiz_paniel_marhold_lihov
+    prompt: "a Alyssum gallaecicum (S.Ortiz) Španiel, Marhold & Lihová plant growing outdoors"
+    concept: "Alyssum gallaecicum (S.Ortiz) Španiel, Marhold & Lihová"
+    coarse: "plant"
+    gt_refs:
+      - 1744602/0d69637af5c95f1aca87788d327b52c003b88655.jpg
+      - 1744602/1d7be112b930c3f84afb39c36db7c9f9a31ffa2d.jpg
+      - 1744602/2c4e54b315eaaacf59934d92dced9cfed1bdadf7.jpg
+      - 1744602/2e1b168658f4b31715206c0b8c7ed0ddbd68737c.jpg
+      - 1744602/5ea2d0bc6e7d404c2279c34fbd51b442eb3da1eb.jpg
+
+  - id: thapsia_scabra_cav_simonsen_r_nsted_weitzel_spalik
+    prompt: "a Thapsia scabra (Cav.) Simonsen, Rønsted, Weitzel & Spalik plant growing outdoors"
+    concept: "Thapsia scabra (Cav.) Simonsen, Rønsted, Weitzel & Spalik"
+    coarse: "plant"
+    gt_refs:
+      - 1744638/0b8f2b44a4c1259321693ace680b86bfdbef5808.jpg
+      - 1744638/32c4455c58070ad417617ad00dea68b171cb222e.jpg
+      - 1744638/91a271cb29731023d690004ef3f16c3aad47d57e.jpg
+      - 1744638/becba0797d56d4cffd27d837d16b3904e13ca02b.jpg
+      - 1744638/f4e57fb373fc17b0653d5d0b9e1d4692dd20d05d.jpg
+
+  - id: santolina_viscosa_lag
+    prompt: "a Santolina viscosa Lag. plant growing outdoors"
+    concept: "Santolina viscosa Lag."
+    coarse: "plant"
+    gt_refs:
+      - 1744860/376de31ebb86743815d72825c0b246a87dc85f37.jpg
+      - 1744860/3847f6c369c1454515be2a03519bd09f5fff5795.jpg
+      - 1744860/39e937117f69df3458d8354c98e6b7f5506b4a11.jpg
+      - 1744860/c9fe1d0279ae5613670dc31077b5f489e33883da.jpg
+      - 1744860/fc3660b2b1f0bbddc3a57256abdbb424286bc6b3.jpg
+
+  - id: asplenium_celtibericum_rivas_mart
+    prompt: "a Asplenium celtibericum Rivas Mart. plant growing outdoors"
+    concept: "Asplenium celtibericum Rivas Mart."
+    coarse: "plant"
+    gt_refs:
+      - 1744869/679b8d5abca255aa7d479654b36b84dcff221607.jpg
+      - 1744869/8cb363896f87a7bb17dbbed4be6624b5b094f8d5.jpg
+      - 1744869/9a7b5c81cb3692ca42dd3e5dc89c9c840c8a34f5.jpg
+      - 1744869/eaf0ddb039b279b4808f76a5020e29344e827107.jpg
+      - 1744869/f31324c807726dbd91ea5fb7a17e43a41d94a68d.jpg
